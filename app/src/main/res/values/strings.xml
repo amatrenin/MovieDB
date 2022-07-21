@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">mypetproject</string>
+    <string name="main_activity_button_registration">Registration</string>
+    <string name="main_activity_email">Email</string>
+    <string name="main_activity_password">Password</string>
+    <string name="main_activity_button_login">login</string>
+</resources>
