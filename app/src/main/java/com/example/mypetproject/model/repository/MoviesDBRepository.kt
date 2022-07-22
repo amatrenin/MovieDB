@@ -1,6 +1,7 @@
 package com.example.mypetproject.model.repository
 
 import com.example.mypetproject.data.Movies
+import com.example.mypetproject.data.MoviesActors
 import com.example.mypetproject.data.MoviesDetails
 import com.example.mypetproject.data.MoviesVideos
 import retrofit2.Call
@@ -20,6 +21,8 @@ interface MoviesDBRepository {
      * @param id - indification number of the needed movie
      */
     fun getMoviesDetails(id : Int) : Call<MoviesDetails>
+
+    fun getActors(id : Int) : Call<MoviesActors>
 
     fun getMoviesVideos(id: Int) : Call<MoviesVideos>
 }

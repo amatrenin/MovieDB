@@ -3,10 +3,7 @@ package com.example.mypetproject.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.mypetproject.data.Movies
-import com.example.mypetproject.data.MoviesDetails
-import com.example.mypetproject.data.MoviesVideos
-import com.example.mypetproject.data.Result
+import com.example.mypetproject.data.*
 import com.example.mypetproject.model.repository.MoviesDBRepository
 import com.example.mypetproject.model.repository.MoviesDBRepositoryImpl
 import retrofit2.Call
@@ -20,6 +17,9 @@ class MoviesViewModel {
 
     private val _movieDetails = MutableLiveData<MoviesDetails>()
     val movieDetails: LiveData<MoviesDetails> = _movieDetails
+
+    private val _movieDetailsActors = MutableLiveData<MoviesActors>()
+    val movieDetailsActors: LiveData<MoviesActors> = _movieDetailsActors
 
     private val _movieVideoYoutubeID = MutableLiveData<MoviesVideos>()
     val movieVideoYoutubeID = _movieVideoYoutubeID
@@ -47,11 +47,25 @@ class MoviesViewModel {
         response.enqueue(object : Callback<MoviesDetails> {
             override fun onResponse(call: Call<MoviesDetails>, response: Response<MoviesDetails>) {
 
-                Log.d("testLogs", "Onresponse Success ${call.toString()}")
+                Log.d("testLogs", "Onresponse Success getMovieDetails${call.toString()}")
                 _movieDetails.postValue(response.body())
             }
 
             override fun onFailure(call: Call<MoviesDetails>, t: Throwable) {
+                Log.d("testLogs", "onFailure : ${t.message}")
+            }
+        })
+    }
+    fun getMovieActors(id: Int) {
+        val response = mMoviesRepository.getActors(id)
+        response.enqueue(object : Callback<MoviesActors> {
+            override fun onResponse(call: Call<MoviesActors>, response: Response<MoviesActors>) {
+
+                Log.d("testLogs", "Onresponse Success getActors${call.toString()}")
+                _movieDetailsActors.postValue(response.body())
+            }
+
+            override fun onFailure(call: Call<MoviesActors>, t: Throwable) {
                 Log.d("testLogs", "onFailure : ${t.message}")
             }
         })
@@ -62,7 +76,7 @@ class MoviesViewModel {
         response.enqueue(object : Callback<MoviesVideos> {
             override fun onResponse(call: Call<MoviesVideos>, response: Response<MoviesVideos>) {
 
-                Log.d("testLogs", "Onresponse Success ${call.toString()}")
+                Log.d("testLogs", "Onresponse Success getVideo${call.toString()}")
                 _movieVideoYoutubeID.postValue(response.body())
             }
             override fun onFailure(call: Call<MoviesVideos>, t: Throwable) {
