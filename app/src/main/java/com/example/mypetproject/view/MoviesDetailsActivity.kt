@@ -1,11 +1,12 @@
 package com.example.mypetproject.view
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mypetproject.R
-import com.example.mypetproject.data.MoviesActors
+import com.example.mypetproject.data.Cast
 import com.example.mypetproject.data.MoviesDetails
 import com.example.mypetproject.viewmodel.MoviesViewModel
 import com.squareup.picasso.Picasso
@@ -49,7 +50,10 @@ class MoviesDetailsActivity : AppCompatActivity() {
     private fun initObserversActors() {
         mViewModel.apply {
             movieDetailsActors.observe(this@MoviesDetailsActivity) {
-                setMovieInformationActors(it)
+                it.cast.forEach { cast ->
+                    setMovieInformationActors(cast)
+                }
+                Log.d("testLogs", "observe ${it}")
             }
         }
     }
@@ -66,7 +70,7 @@ class MoviesDetailsActivity : AppCompatActivity() {
             .into(mBanner)
     }
 
-    private fun setMovieInformationActors(movieDetailsActors: MoviesActors?) {
+    private fun setMovieInformationActors(movieDetailsActors: Cast?) {
         mTitleActors.text = movieDetailsActors?.name
 
         Picasso.get()

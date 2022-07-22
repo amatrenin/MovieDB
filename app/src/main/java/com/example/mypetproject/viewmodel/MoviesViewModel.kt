@@ -3,6 +3,7 @@ package com.example.mypetproject.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.mypetproject.data.*
 import com.example.mypetproject.model.repository.MoviesDBRepository
 import com.example.mypetproject.model.repository.MoviesDBRepositoryImpl
@@ -10,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MoviesViewModel {
+class MoviesViewModel : ViewModel(){
 
     private val _movies = MutableLiveData<List<Result?>>()
     val movies: LiveData<List<Result?>> = _movies
