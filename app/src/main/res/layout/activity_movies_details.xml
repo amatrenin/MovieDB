@@ -140,8 +140,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/movies_details_actors_banner"
-            android:layout_width="396dp"
-            android:layout_height="242dp"
+            android:layout_width="312dp"
+            android:layout_height="238dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
