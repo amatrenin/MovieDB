@@ -13,6 +13,7 @@
         android:roundIcon="@drawable/movies"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mypetproject">
+
         <activity
             android:name=".view.MoviesDetailsActivity"
             android:exported="false" />
