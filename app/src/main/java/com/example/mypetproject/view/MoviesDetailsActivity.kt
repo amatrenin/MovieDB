@@ -9,9 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
-import com.example.mypetproject.data.Cast
 import com.example.mypetproject.data.MoviesDetails
-import com.example.mypetproject.view.adapters.CustomAdapter
 import com.example.mypetproject.view.adapters.CustomAdapterActors
 import com.example.mypetproject.viewmodel.MoviesViewModel
 import com.squareup.picasso.Picasso
@@ -55,7 +53,7 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         }
     }
 
-    private fun initObserversActors(actors: Cast) {
+    private fun initObserversActors() {
         mViewModel.apply {
             movieDetailsActors.observe(this@MoviesDetailsActivity) {
                 mMoviesActorsAdapter = CustomAdapterActors(it, this@MoviesDetailsActivity)

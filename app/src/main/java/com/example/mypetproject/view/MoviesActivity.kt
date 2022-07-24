@@ -10,11 +10,9 @@ import com.example.mypetproject.R
 import com.example.mypetproject.view.adapters.CustomAdapter
 import com.example.mypetproject.viewmodel.MoviesViewModel
 
-
 class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
 
     private val mViewModel: MoviesViewModel = MoviesViewModel()
-
 
     private lateinit var mMoviesRecycler: RecyclerView
     private lateinit var mMoviesAdapter: CustomAdapter

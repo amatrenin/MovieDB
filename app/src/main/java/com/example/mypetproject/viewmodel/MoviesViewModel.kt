@@ -19,8 +19,8 @@ class MoviesViewModel : ViewModel(){
     private val _movieDetails = MutableLiveData<MoviesDetails>()
     val movieDetails: LiveData<MoviesDetails> = _movieDetails
 
-    private val _movieDetailsActors = MutableLiveData<MoviesActors>()
-    val movieDetailsActors: LiveData<MoviesActors> = _movieDetailsActors
+    private val _movieDetailsActors = MutableLiveData<List<Cast>>()
+    val movieDetailsActors: LiveData<List<Cast>> = _movieDetailsActors
 
     private val _movieVideoYoutubeID = MutableLiveData<MoviesVideos>()
     val movieVideoYoutubeID = _movieVideoYoutubeID
@@ -63,7 +63,7 @@ class MoviesViewModel : ViewModel(){
             override fun onResponse(call: Call<MoviesActors>, response: Response<MoviesActors>) {
 
                 Log.d("testLogs", "Onresponse Success getActors${call.toString()}")
-                _movieDetailsActors.postValue(response.body())
+                _movieDetailsActors.postValue(response?.body()?.cast)
             }
 
             override fun onFailure(call: Call<MoviesActors>, t: Throwable) {
