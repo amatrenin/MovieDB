@@ -4,6 +4,7 @@ import com.example.mypetproject.data.Movies
 import com.example.mypetproject.data.MoviesActors
 import com.example.mypetproject.data.MoviesDetails
 import com.example.mypetproject.data.MoviesVideos
+import com.example.mypetproject.data.review.review
 import retrofit2.Call
 
 /**
@@ -23,6 +24,8 @@ interface MoviesDBRepository {
     fun getMoviesDetails(id : Int) : Call<MoviesDetails>
 
     fun getActors(id : Int) : Call<MoviesActors>
+
+    fun getReview(id : Int) : Call<review>
 
     fun getMoviesVideos(id: Int) : Call<MoviesVideos>
 }

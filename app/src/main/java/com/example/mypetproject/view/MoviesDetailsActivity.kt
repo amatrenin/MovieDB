@@ -23,12 +23,13 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
     private lateinit var mMoviesActorsAdapter: CustomAdapterActors
 
     private lateinit var mTitle: TextView
-    private lateinit var mTitleActors: TextView
+    private lateinit var mAuthorReview: TextView
     private lateinit var mReliaseDate: TextView
     private lateinit var mScore: TextView
     private lateinit var mOverview: TextView
     private lateinit var mBanner: ImageView
-    private lateinit var mBannerActors: ImageView
+    private lateinit var mAvatarReview: ImageView
+    private lateinit var mContentReview: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +43,7 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         mViewModel.getMovieDetails(id)
         mViewModel.getMoviesVideos(id)
         mViewModel.getMovieActors(id)
+        mViewModel.getReview(id)
     }
 
     private fun initObservers() {
@@ -77,14 +79,6 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
             .load("https://image.tmdb.org/t/p/w500" + movieDetails?.backdrop_path)
             .into(mBanner)
     }
-
-//    private fun setMovieInformationActors(movieDetailsActors: Cast?) {
-//        mTitleActors.text = movieDetailsActors?.name
-//
-//        Picasso.get()
-//            .load("https://image.tmdb.org/t/p/w500" + movieDetailsActors?.profile_path)
-//            .into(mBannerActors)
-    //   }
 
     private fun initViews() {
         mTitle = findViewById(R.id.movies_details_title)

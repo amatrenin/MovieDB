@@ -4,6 +4,7 @@ import com.example.mypetproject.data.Movies
 import com.example.mypetproject.data.MoviesActors
 import com.example.mypetproject.data.MoviesDetails
 import com.example.mypetproject.data.MoviesVideos
+import com.example.mypetproject.data.review.review
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -30,10 +31,19 @@ interface ApiInterface {
         @Query("api_key") apiKey: String,
     ): Call<MoviesActors>
 
+    @GET("3/movie/{movie_id}/reviews")
+    fun getReviews(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String,
+    ): Call<review>
+
+
     @GET("3/movie/{movie_id}/videos")
     fun getVideos(@Path("movie_id") movieId: Int,
                   @Query("api_key") sort: String
     ): Call<MoviesVideos>
+
+
 
     companion object {
 
