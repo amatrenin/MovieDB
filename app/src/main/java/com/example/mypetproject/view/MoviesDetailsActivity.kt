@@ -6,7 +6,7 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
 import com.example.mypetproject.data.MoviesDetails
@@ -42,7 +42,6 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         mViewModel.getMovieDetails(id)
         mViewModel.getMoviesVideos(id)
         mViewModel.getMovieActors(id)
-
     }
 
     private fun initObservers() {
@@ -89,16 +88,16 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
 
     private fun initViews() {
         mTitle = findViewById(R.id.movies_details_title)
-        //      mTitleActors = findViewById(R.id.movies_details_actor_name)
         mReliaseDate = findViewById(R.id.movies_details_date)
         mScore = findViewById(R.id.movies_details_score)
         mOverview = findViewById(R.id.movies_details_body_overview)
         mBanner = findViewById(R.id.movies_details_image_banner)
-        mBannerActors = findViewById(R.id.imageViewActors)
+        // mBannerActors = findViewById(R.id.imageViewActors)
 
 
-        mMoviesActorsRecycler = findViewById(R.id.recyclerview)
-        mMoviesActorsRecycler.layoutManager = GridLayoutManager(this, 2)
+        mMoviesActorsRecycler = findViewById(R.id.rcViewActors)
+        mMoviesActorsRecycler.layoutManager = LinearLayoutManager(this,
+            LinearLayoutManager.HORIZONTAL, false)
 
     }
 

@@ -31,13 +31,13 @@ class MoviesViewModel : ViewModel(){
         val response = mMoviesRepository.getMovies()
         response.enqueue(object : Callback<Movies> {
             override fun onResponse(call: Call<Movies>?, response: Response<Movies>?) {
-                Log.d("testLogs", "On response Success ${call.toString()}")
+                Log.d("testLogs", "On response Success Movies : ${call.toString()}")
                 _movies.postValue(response?.body()?.results)
             }
 
 
             override fun onFailure(call: Call<Movies>, t: Throwable) {
-                Log.d("testLogs", "onFailure : ${t.message}")
+                Log.d("testLogs", "onFailure Movies : ${t.message}")
 
             }
         })
@@ -53,7 +53,7 @@ class MoviesViewModel : ViewModel(){
             }
 
             override fun onFailure(call: Call<MoviesDetails>, t: Throwable) {
-                Log.d("testLogs", "onFailure : ${t.message}")
+                Log.d("testLogs", "onFailure getMovieDetails : ${t.message}")
             }
         })
     }
@@ -67,7 +67,7 @@ class MoviesViewModel : ViewModel(){
             }
 
             override fun onFailure(call: Call<MoviesActors>, t: Throwable) {
-                Log.d("testLogs", "onFailure : ${t.message}")
+                Log.d("testLogs", "onFailure getActors : ${t.message}")
             }
         })
     }
@@ -81,7 +81,7 @@ class MoviesViewModel : ViewModel(){
                 _movieVideoYoutubeID.postValue(response.body())
             }
             override fun onFailure(call: Call<MoviesVideos>, t: Throwable) {
-                Log.d("testLogs", "onFailure : ${t.message}")
+                Log.d("testLogs", "onFailure getVideo : ${t.message}")
             }
         })
     }
