@@ -10,15 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
 import com.example.mypetproject.data.MoviesDetails
-import com.example.mypetproject.data.review.ResultReview
 import com.example.mypetproject.view.adapters.CustomAdapterActors
 import com.example.mypetproject.view.adapters.CustomAdapterReview
 import com.example.mypetproject.viewmodel.MoviesViewModel
 import com.squareup.picasso.Picasso
 
 
-class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors,
-    CustomAdapterReview.ItemClickListenerReview {
+class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors, CustomAdapterReview.ItemClickListenerReview{
 
     private val mViewModel: MoviesViewModel = MoviesViewModel()
 
@@ -78,7 +76,7 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
     private fun initObserversReview() {
         mViewModel.apply {
             movieReview.observe(this@MoviesDetailsActivity) {
-                mReviewRecycler = CustomAdapterReview(it, this@MoviesDetailsActivity)
+                mReviewAdapter = CustomAdapterReview(it, this@MoviesDetailsActivity)
                 mReviewRecycler.adapter = mReviewAdapter
 
 //                it.cast.forEach { cast ->
@@ -107,13 +105,12 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         mScore = findViewById(R.id.movies_details_score)
         mOverview = findViewById(R.id.movies_details_body_overview)
         mBanner = findViewById(R.id.movies_details_image_banner)
-        mAvatarReview = findViewById(R.id.imAvatarReview)
 
 
         mMoviesActorsRecycler = findViewById(R.id.rcViewActors)
         mMoviesActorsRecycler.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.HORIZONTAL, false)
-
+//
         mReviewRecycler = findViewById(R.id.rcReview)
         mReviewRecycler.layoutManager = LinearLayoutManager(this)
     }
@@ -124,7 +121,9 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         startActivity(intent)
     }
 
-    override fun onItemClickReview(position: Int) {
-        TODO("Not yet implemented")
+    override fun onItemClickReview(id: Int) {
+        val intent = Intent(this, MoviesActivityActors::class.java)
+        intent.putExtra("id", id)
+        startActivity(intent)
     }
 }
