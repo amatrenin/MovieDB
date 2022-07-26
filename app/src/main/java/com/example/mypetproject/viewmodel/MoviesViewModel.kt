@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mypetproject.data.*
+import com.example.mypetproject.data.review.ResultReview
 import com.example.mypetproject.data.review.review
 import com.example.mypetproject.model.repository.MoviesDBRepository
 import com.example.mypetproject.model.repository.MoviesDBRepositoryImpl
@@ -23,8 +24,8 @@ class MoviesViewModel : ViewModel(){
     private val _movieDetailsActors = MutableLiveData<List<Cast>>()
     val movieDetailsActors: LiveData<List<Cast>> = _movieDetailsActors
 
-    private val _movieReview = MutableLiveData<review>()
-    val movieReview: LiveData<review> = _movieReview
+    private val _movieReview = MutableLiveData<List<ResultReview>>()
+    val movieReview: LiveData<List<ResultReview>> = _movieReview
 
     private val _movieVideoYoutubeID = MutableLiveData<MoviesVideos>()
     val movieVideoYoutubeID = _movieVideoYoutubeID
@@ -81,8 +82,8 @@ class MoviesViewModel : ViewModel(){
         response.enqueue(object : Callback<review> {
             override fun onResponse(call: Call<review>, response: Response<review>) {
 
-                Log.d("testLogs", "Onresponse Success getActors${call.toString()}")
-                _movieReview.postValue(response?.body())
+                Log.d("testLogs", "Onresponse Success getReview${call.toString()}")
+                _movieReview.postValue(response.body()?.results)
             }
 
             override fun onFailure(call: Call<review>, t: Throwable) {
