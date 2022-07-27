@@ -1,4 +1,4 @@
-package com.example.mypetproject.data
+package com.example.mypetproject.data.Movies
 
 data class Movies(
     val page: Int,

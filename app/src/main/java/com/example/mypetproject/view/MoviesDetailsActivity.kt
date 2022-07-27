@@ -9,22 +9,29 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
-import com.example.mypetproject.data.MoviesDetails
+import com.example.mypetproject.data.Details.MoviesDetails
 import com.example.mypetproject.view.adapters.CustomAdapterActors
 import com.example.mypetproject.view.adapters.CustomAdapterReview
+import com.example.mypetproject.view.adapters.CustomAdapterVideos
 import com.example.mypetproject.viewmodel.MoviesViewModel
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
 
 
-class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors, CustomAdapterReview.ItemClickListenerReview{
+class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors,
+    CustomAdapterReview.ItemClickListenerReview, CustomAdapterVideos.ItemClickListenerVideos{
 
     private val mViewModel: MoviesViewModel = MoviesViewModel()
+
 
     private lateinit var mMoviesActorsRecycler: RecyclerView
     private lateinit var mMoviesActorsAdapter: CustomAdapterActors
 
     private lateinit var mReviewRecycler: RecyclerView
     private lateinit var mReviewAdapter: CustomAdapterReview
+
+    private lateinit var mVideosRecycler: RecyclerView
+    private lateinit var mVideosAdapter: CustomAdapterVideos
 
     private lateinit var mTitle: TextView
     private lateinit var mReliaseDate: TextView
@@ -45,6 +52,7 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         initObservers()
         initObserversActors()
         initObserversReview()
+        initObserversVideos()
         mViewModel.getMovieDetails(id)
         mViewModel.getMoviesVideos(id)
         mViewModel.getMovieActors(id)
@@ -87,6 +95,19 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         }
     }
 
+    private fun initObserversVideos() {
+        mViewModel.apply {
+            movieVideoYoutubeID.observe(this@MoviesDetailsActivity) {
+                mVideosAdapter = CustomAdapterVideos(it, this@MoviesDetailsActivity)
+                mVideosRecycler.adapter = mVideosAdapter
+
+
+                Log.d("testLogs", "videos observe ${it}")
+            }
+        }
+    }
+
+
     private fun setMovieInformation(movieDetails: MoviesDetails?) {
         mTitle.text = movieDetails?.title
         mReliaseDate.text = movieDetails?.release_date.toString()
@@ -113,6 +134,10 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
 //
         mReviewRecycler = findViewById(R.id.rcReview)
         mReviewRecycler.layoutManager = LinearLayoutManager(this)
+
+        mVideosRecycler = findViewById(R.id.rcMoviesVideos)
+        mVideosRecycler.layoutManager = LinearLayoutManager(this,
+            LinearLayoutManager.HORIZONTAL, false)
     }
 
     override fun onItemClickActors(id: Int) {
@@ -123,6 +148,12 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
 
     override fun onItemClickReview(id: Int) {
         val intent = Intent(this, MoviesActivityActors::class.java)
+        intent.putExtra("id", id)
+        startActivity(intent)
+    }
+
+    override fun onItemClickVideos(id: Int) {
+        val intent = Intent(this, MoviesVideosActivity::class.java)
         intent.putExtra("id", id)
         startActivity(intent)
     }

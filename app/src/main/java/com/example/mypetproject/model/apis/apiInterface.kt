@@ -1,9 +1,9 @@
 package com.example.mypetproject
 
-import com.example.mypetproject.data.Movies
-import com.example.mypetproject.data.MoviesActors
-import com.example.mypetproject.data.MoviesDetails
-import com.example.mypetproject.data.MoviesVideos
+import com.example.mypetproject.data.Details.MoviesDetails
+import com.example.mypetproject.data.Movies.Movies
+import com.example.mypetproject.data.MoviesVideos.MoviesVideos
+import com.example.mypetproject.data.actors.MoviesActors
 import com.example.mypetproject.data.review.review
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -40,7 +40,7 @@ interface ApiInterface {
 
     @GET("3/movie/{movie_id}/videos")
     fun getVideos(@Path("movie_id") movieId: Int,
-                  @Query("api_key") sort: String
+                  @Query("api_key") apiKey: String
     ): Call<MoviesVideos>
 
 

@@ -4,7 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mypetproject.data.*
+import com.example.mypetproject.data.Details.MoviesDetails
+import com.example.mypetproject.data.Movies.Movies
+import com.example.mypetproject.data.Movies.Result
+import com.example.mypetproject.data.MoviesVideos.MoviesVideos
+import com.example.mypetproject.data.MoviesVideos.ResultX
+import com.example.mypetproject.data.actors.Cast
+import com.example.mypetproject.data.actors.MoviesActors
 import com.example.mypetproject.data.review.ResultReview
 import com.example.mypetproject.data.review.review
 import com.example.mypetproject.model.repository.MoviesDBRepository
@@ -27,8 +33,8 @@ class MoviesViewModel : ViewModel(){
     private val _movieReview = MutableLiveData<List<ResultReview>>()
     val movieReview: LiveData<List<ResultReview>> = _movieReview
 
-    private val _movieVideoYoutubeID = MutableLiveData<MoviesVideos>()
-    val movieVideoYoutubeID = _movieVideoYoutubeID
+    private val _movieVideoYoutubeID = MutableLiveData<List<ResultX>>()
+    val movieVideoYoutubeID: LiveData<List<ResultX>> = _movieVideoYoutubeID
 
      val mMoviesRepository: MoviesDBRepository = MoviesDBRepositoryImpl()
 
@@ -98,7 +104,7 @@ class MoviesViewModel : ViewModel(){
             override fun onResponse(call: Call<MoviesVideos>, response: Response<MoviesVideos>) {
 
                 Log.d("testLogs", "Onresponse Success getVideo${call.toString()}")
-                _movieVideoYoutubeID.postValue(response.body())
+                _movieVideoYoutubeID.postValue(response.body()?.results)
             }
             override fun onFailure(call: Call<MoviesVideos>, t: Throwable) {
                 Log.d("testLogs", "onFailure getVideo : ${t.message}")

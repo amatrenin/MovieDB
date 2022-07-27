@@ -9,14 +9,16 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/activity_movies.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_movies_actors.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/activity_movies_details.xml" value="0.37070312499999997" />
+        <entry key="app/src/main/res/layout/activity_movies_details.xml" value="0.3025405883789062" />
+        <entry key="app/src/main/res/layout/activity_movies_videos.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_trailer_single_item.xml" value="0.1648148148148148" />
         <entry key="app/src/main/res/layout/card_view_actors.xml" value="0.30885416666666665" />
         <entry key="app/src/main/res/layout/card_view_design.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/card_view_design_actors.xml" value="0.30885416666666665" />
-        <entry key="app/src/main/res/layout/card_view_design_review.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/card_view_design_review.xml" value="0.4967931111653646" />
         <entry key="app/src/main/res/layout/test.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/youtube_player_view.xml" value="0.29375" />
       </map>
     </option>
   </component>

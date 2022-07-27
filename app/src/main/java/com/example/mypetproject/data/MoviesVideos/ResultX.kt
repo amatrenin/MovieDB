@@ -1,4 +1,4 @@
-package com.example.mypetproject.data
+package com.example.mypetproject.data.MoviesVideos
 
 data class ResultX(
     val id: String,

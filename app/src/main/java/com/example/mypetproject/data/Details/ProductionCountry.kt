@@ -1,4 +1,4 @@
-package com.example.mypetproject.data
+package com.example.mypetproject.data.Details
 
 data class ProductionCountry(
     val iso_3166_1: String,

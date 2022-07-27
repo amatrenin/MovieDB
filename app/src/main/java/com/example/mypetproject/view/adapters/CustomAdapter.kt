@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
-import com.example.mypetproject.data.Result
+import com.example.mypetproject.data.Movies.Result
 import com.squareup.picasso.Picasso
 
 class CustomAdapter(private val mList: List<Result?>,

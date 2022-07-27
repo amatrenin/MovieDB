@@ -1,4 +1,4 @@
-package com.example.mypetproject.data
+package com.example.mypetproject.data.Details
 
 data class ProductionCompany(
     val id: Int,
