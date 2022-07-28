@@ -103,7 +103,7 @@ class MoviesViewModel : ViewModel(){
         response.enqueue(object : Callback<MoviesVideos> {
             override fun onResponse(call: Call<MoviesVideos>, response: Response<MoviesVideos>) {
 
-                Log.d("testLogs", "Onresponse Success getVideo${call.toString()}")
+                Log.d("testLogs", "Onresponse Success getVideo : ${call.toString()}")
                 _movieVideoYoutubeID.postValue(response.body()?.results)
             }
             override fun onFailure(call: Call<MoviesVideos>, t: Throwable) {

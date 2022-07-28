@@ -10,16 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
 import com.example.mypetproject.data.Details.MoviesDetails
+import com.example.mypetproject.data.MoviesVideos.ResultX
 import com.example.mypetproject.view.adapters.CustomAdapterActors
 import com.example.mypetproject.view.adapters.CustomAdapterReview
-import com.example.mypetproject.view.adapters.CustomAdapterVideos
+import com.example.mypetproject.view.adapters.TrailerAdapter
 import com.example.mypetproject.viewmodel.MoviesViewModel
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.squareup.picasso.Picasso
 
 
 class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors,
-    CustomAdapterReview.ItemClickListenerReview, CustomAdapterVideos.ItemClickListenerVideos{
+    CustomAdapterReview.ItemClickListenerReview {
 
     private val mViewModel: MoviesViewModel = MoviesViewModel()
 
@@ -31,16 +32,14 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
     private lateinit var mReviewAdapter: CustomAdapterReview
 
     private lateinit var mVideosRecycler: RecyclerView
-    private lateinit var mVideosAdapter: CustomAdapterVideos
+    private lateinit var mTrailerAdapter: TrailerAdapter
 
     private lateinit var mTitle: TextView
     private lateinit var mReliaseDate: TextView
     private lateinit var mScore: TextView
     private lateinit var mOverview: TextView
     private lateinit var mBanner: ImageView
-    private lateinit var mAvatarReview: ImageView
-    private lateinit var mAuthorReview: TextView
-    private lateinit var mTextReview: TextView
+    private lateinit var mYouTubePlayer: YouTubePlayer
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,8 +97,8 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
     private fun initObserversVideos() {
         mViewModel.apply {
             movieVideoYoutubeID.observe(this@MoviesDetailsActivity) {
-                mVideosAdapter = CustomAdapterVideos(it, this@MoviesDetailsActivity)
-                mVideosRecycler.adapter = mVideosAdapter
+                mTrailerAdapter = TrailerAdapter(it, this@MoviesDetailsActivity)
+                mVideosRecycler.adapter = mTrailerAdapter
 
 
                 Log.d("testLogs", "videos observe ${it}")
@@ -107,6 +106,10 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         }
     }
 
+    private fun setMovieInformationVideos(movieVideos: ResultX?) {
+        //mYouTubePlayer.loadVideo("awdaw", 0f) = movieVideos?.id
+
+    }
 
     private fun setMovieInformation(movieDetails: MoviesDetails?) {
         mTitle.text = movieDetails?.title
@@ -120,12 +123,14 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
             .into(mBanner)
     }
 
+
     private fun initViews() {
         mTitle = findViewById(R.id.movies_details_title)
         mReliaseDate = findViewById(R.id.movies_details_date)
         mScore = findViewById(R.id.movies_details_score)
         mOverview = findViewById(R.id.movies_details_body_overview)
         mBanner = findViewById(R.id.movies_details_image_banner)
+
 
 
         mMoviesActorsRecycler = findViewById(R.id.rcViewActors)
@@ -135,9 +140,11 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         mReviewRecycler = findViewById(R.id.rcReview)
         mReviewRecycler.layoutManager = LinearLayoutManager(this)
 
-        mVideosRecycler = findViewById(R.id.rcMoviesVideos)
+
+        mVideosRecycler = findViewById(R.id.rcVideosRecycler)
         mVideosRecycler.layoutManager = LinearLayoutManager(this,
-            LinearLayoutManager.HORIZONTAL, false)
+        LinearLayoutManager.HORIZONTAL, false)
+
     }
 
     override fun onItemClickActors(id: Int) {
@@ -148,12 +155,6 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
 
     override fun onItemClickReview(id: Int) {
         val intent = Intent(this, MoviesActivityActors::class.java)
-        intent.putExtra("id", id)
-        startActivity(intent)
-    }
-
-    override fun onItemClickVideos(id: Int) {
-        val intent = Intent(this, MoviesVideosActivity::class.java)
         intent.putExtra("id", id)
         startActivity(intent)
     }
