@@ -19,7 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MoviesViewModel : ViewModel(){
+class MoviesViewModel : ViewModel() {
 
     private val _movies = MutableLiveData<List<Result?>>()
     val movies: LiveData<List<Result?>> = _movies
@@ -36,7 +36,7 @@ class MoviesViewModel : ViewModel(){
     private val _movieVideoYoutubeID = MutableLiveData<List<ResultX>>()
     val movieVideoYoutubeID: LiveData<List<ResultX>> = _movieVideoYoutubeID
 
-     val mMoviesRepository: MoviesDBRepository = MoviesDBRepositoryImpl()
+    val mMoviesRepository: MoviesDBRepository = MoviesDBRepositoryImpl()
 
     fun getMovies() {
         val response = mMoviesRepository.getMovies()
@@ -68,6 +68,7 @@ class MoviesViewModel : ViewModel(){
             }
         })
     }
+
     fun getMovieActors(id: Int) {
         val response = mMoviesRepository.getActors(id)
         response.enqueue(object : Callback<MoviesActors> {
@@ -106,6 +107,7 @@ class MoviesViewModel : ViewModel(){
                 Log.d("testLogs", "Onresponse Success getVideo : ${call.toString()}")
                 _movieVideoYoutubeID.postValue(response.body()?.results)
             }
+
             override fun onFailure(call: Call<MoviesVideos>, t: Throwable) {
                 Log.d("testLogs", "onFailure getVideo : ${t.message}")
             }

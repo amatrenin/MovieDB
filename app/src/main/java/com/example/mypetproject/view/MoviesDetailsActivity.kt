@@ -143,7 +143,7 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
 
         mVideosRecycler = findViewById(R.id.rcVideosRecycler)
         mVideosRecycler.layoutManager = LinearLayoutManager(this,
-        LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager.HORIZONTAL, false)
 
     }
 

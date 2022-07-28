@@ -49,30 +49,30 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
-      when(result.resultCode) {
-          RESULT_OK -> {
-            val authUser = FirebaseAuth.getInstance().currentUser
-            authUser?.let {
-                val email = it.email.toString()
-                val uid = it.uid
-                val firebaseUser = User(email, uid)
+        when (result.resultCode) {
+            RESULT_OK -> {
+                val authUser = FirebaseAuth.getInstance().currentUser
+                authUser?.let {
+                    val email = it.email.toString()
+                    val uid = it.uid
+                    val firebaseUser = User(email, uid)
 
-                mMainActivityViewModel.updateUserData(firebaseUser, uid)
+                    mMainActivityViewModel.updateUserData(firebaseUser, uid)
 
-                val intentToAnotherScreen = Intent(this, MoviesActivity::class.java)
-                startActivity(intentToAnotherScreen)
+                    val intentToAnotherScreen = Intent(this, MoviesActivity::class.java)
+                    startActivity(intentToAnotherScreen)
+                }
+            }
+
+            RESULT_CANCELED -> {
+                Toast.makeText(this@MainActivity, "Something wrong with registration",
+                    Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                //do not to anything
             }
         }
-
-        RESULT_CANCELED -> {
-            Toast.makeText(this@MainActivity, "Something wrong with registration",
-                Toast.LENGTH_SHORT).show()
-        }
-        else -> {
-            //do not to anything
-        }
     }
-}
 }
 
 

@@ -6,7 +6,6 @@ import com.example.mypetproject.model.repository.FirebaseRepository
 import com.example.mypetproject.model.repository.FirebaseRepositoryImpl
 
 
-
 class MainActivityViewModel {
 
     private val mFirebaseRepository: FirebaseRepository = FirebaseRepositoryImpl()
