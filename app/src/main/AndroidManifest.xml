@@ -14,9 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mypetproject">
         <activity
-            android:name=".MoviesVideosActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.MoviesActivityActors"
             android:exported="false" />
         <activity
