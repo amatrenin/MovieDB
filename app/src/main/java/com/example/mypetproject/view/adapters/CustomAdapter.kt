@@ -9,9 +9,10 @@ import com.example.mypetproject.R
 import com.example.mypetproject.data.Movies.Result
 import com.squareup.picasso.Picasso
 
-class CustomAdapter(private val mList: List<Result?>,
-                    val mItemClickListener: ItemClickListener
-                    ) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(
+    private val mList: List<Result?>,
+    val mItemClickListener: ItemClickListener,
+) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     interface ItemClickListener {
         fun onItemClick(position: Int)
@@ -32,8 +33,6 @@ class CustomAdapter(private val mList: List<Result?>,
 
         Picasso.get().load("https://image.tmdb.org/t/p/w500" + mList[position]?.poster_path)
             .into(holder.imageView)
-
-
     }
 
     // return the number of the items in the list
@@ -50,7 +49,5 @@ class CustomAdapter(private val mList: List<Result?>,
                 mList[position]?.id?.let { it -> mItemClickListener.onItemClick(it) }
             }
         }
-
-
     }
 }

@@ -13,7 +13,6 @@ class MoviesActivityActors : AppCompatActivity() {
     private val mViewModel: MoviesViewModel = MoviesViewModel()
 
     private lateinit var mMoviesActorsRecycler: RecyclerView
- //   private lateinit var mMoviesActorsAdapter: CustomAdapterActors
 
     private lateinit var mTitleActors: TextView
     private lateinit var mBiography: TextView

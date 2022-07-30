@@ -35,7 +35,6 @@ class CustomAdapterActors(
         Picasso.get().load("https://image.tmdb.org/t/p/w500" + mListActors[position]?.profile_path)
             .into(holder.imageView)
 
-
     }
 
     // return the number of the items in the list
@@ -52,9 +51,5 @@ class CustomAdapterActors(
                 mListActors[position]?.id?.let { it -> mItemClickListenerActors.onItemClickActors(it) }
             }
         }
-
-
     }
-
-
 }

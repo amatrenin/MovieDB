@@ -18,27 +18,16 @@ class TrailerAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-//    var trailerList: List<Trailer> = emptyList()
-//        @SuppressLint("NotifyDataSetChanged")
-//        set(newValue) {
-//            field = newValue
-//            notifyDataSetChanged()
-//        }
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val productsItems: View =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_trailer, parent, false)
         return FruitViewHolder(productsItems)
-
     }
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val fruitHolder = holder as FruitViewHolder
         trailerList[position]?.let { fruitHolder.bind(it) }
-
     }
 
     inner class FruitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -92,8 +81,5 @@ class TrailerAdapter(
         }
     }
 
-
     override fun getItemCount(): Int = trailerList.size
-
-
 }
