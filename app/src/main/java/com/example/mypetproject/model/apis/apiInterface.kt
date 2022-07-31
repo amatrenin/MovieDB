@@ -31,6 +31,13 @@ interface ApiInterface {
         @Query("api_key") apiKey: String,
     ): Call<MoviesActors>
 
+    // here is a new request
+//    @GET("3/movie/{movie_id}/credits")
+//    fun getActors(
+//        @Path("movie_id") movieId: Int,
+//        @Query("api_key") apiKey: String,
+//    ): Call<MoviesActors>
+
     @GET("3/movie/{movie_id}/reviews")
     fun getReviews(
         @Path("movie_id") movieId: Int,
