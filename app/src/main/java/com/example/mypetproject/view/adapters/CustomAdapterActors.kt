@@ -32,8 +32,11 @@ class CustomAdapterActors(
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+
+
         Picasso.get().load("https://image.tmdb.org/t/p/w500" + mListActors[position]?.profile_path)
             .into(holder.imageView)
+
 
     }
 

@@ -7,77 +7,11 @@
     android:background="@color/background"
     tools:context=".view.MoviesDetailsActivity">
 
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/actors_details_title"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcActorsActivity"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Name of the movie"
-        android:textColor="@color/black"
-        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/actors_details_header_container_card"
-        android:layout_width="464dp"
-        android:layout_height="253dp"
-        android:layout_margin="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/actors_details_title">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/actors_details_image_banner"
-            android:layout_width="525dp"
-            android:layout_height="333dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/actors_details_header_container_card" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/actors_details_body_container_card"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actors_details_header_container_card">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/actors_details_body_container_constraint"
-            android:layout_width="415dp"
-            android:layout_height="wrap_content"
-            android:padding="4dp">
-
-            <TextView
-                android:id="@+id/actors_details_birthday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="birthday"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/actors_details_dody_biography"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="OverviewOverviewOverviewOverviewOverviewOverviewOverviewOverview"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/actors_details_birthday" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

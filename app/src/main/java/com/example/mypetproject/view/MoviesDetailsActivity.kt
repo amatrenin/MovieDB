@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
 import com.example.mypetproject.data.Details.MoviesDetails
-import com.example.mypetproject.data.MoviesVideos.ResultX
 import com.example.mypetproject.view.adapters.CustomAdapterActors
 import com.example.mypetproject.view.adapters.CustomAdapterReview
 import com.example.mypetproject.view.adapters.TrailerAdapter
@@ -106,11 +105,6 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         }
     }
 
-    private fun setMovieInformationVideos(movieVideos: ResultX?) {
-        //mYouTubePlayer.loadVideo("awdaw", 0f) = movieVideos?.id
-
-    }
-
     private fun setMovieInformation(movieDetails: MoviesDetails?) {
         mTitle.text = movieDetails?.title
         mReliaseDate.text = movieDetails?.release_date.toString()
@@ -131,8 +125,6 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         mOverview = findViewById(R.id.movies_details_body_overview)
         mBanner = findViewById(R.id.movies_details_image_banner)
 
-
-
         mMoviesActorsRecycler = findViewById(R.id.rcViewActors)
         mMoviesActorsRecycler.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.HORIZONTAL, false)
@@ -140,11 +132,9 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         mReviewRecycler = findViewById(R.id.rcReview)
         mReviewRecycler.layoutManager = LinearLayoutManager(this)
 
-
         mVideosRecycler = findViewById(R.id.rcVideosRecycler)
         mVideosRecycler.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.HORIZONTAL, false)
-
     }
 
     override fun onItemClickActors(id: Int) {
