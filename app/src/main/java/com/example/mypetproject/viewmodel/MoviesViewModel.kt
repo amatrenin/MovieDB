@@ -11,6 +11,7 @@ import com.example.mypetproject.data.MoviesVideos.MoviesVideos
 import com.example.mypetproject.data.MoviesVideos.ResultX
 import com.example.mypetproject.data.actors.Cast
 import com.example.mypetproject.data.actors.MoviesActors
+import com.example.mypetproject.data.actors.details.ActorsDetails
 import com.example.mypetproject.data.review.ResultReview
 import com.example.mypetproject.data.review.review
 import com.example.mypetproject.model.repository.MoviesDBRepository
@@ -29,6 +30,9 @@ class MoviesViewModel : ViewModel() {
 
     private val _movieDetailsActors = MutableLiveData<List<Cast>>()
     val movieDetailsActors: LiveData<List<Cast>> = _movieDetailsActors
+
+    private val _movieDetailsActorsActivity = MutableLiveData<ActorsDetails>()
+    val movieDetailsActorsActivity: LiveData<ActorsDetails> = _movieDetailsActorsActivity
 
     private val _movieReview = MutableLiveData<List<ResultReview>>()
     val movieReview: LiveData<List<ResultReview>> = _movieReview
@@ -79,6 +83,21 @@ class MoviesViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<MoviesActors>, t: Throwable) {
+                Log.d("testLogs", "onFailure getActors : ${t.message}")
+            }
+        })
+    }
+
+    fun getMovieActorsDetails(id: Int) {
+        val response = mMoviesRepository.getActorsDetails(id)
+        response.enqueue(object : Callback<ActorsDetails> {
+            override fun onResponse(call: Call<ActorsDetails>, response: Response<ActorsDetails>) {
+
+                Log.d("testLogs", "Onresponse Success getActors${call.toString()}")
+                _movieDetailsActorsActivity.postValue(response?.body())
+            }
+
+            override fun onFailure(call: Call<ActorsDetails>, t: Throwable) {
                 Log.d("testLogs", "onFailure getActors : ${t.message}")
             }
         })

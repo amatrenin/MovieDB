@@ -6,6 +6,7 @@ import com.example.mypetproject.data.Details.MoviesDetails
 import com.example.mypetproject.data.Movies.Movies
 import com.example.mypetproject.data.MoviesVideos.MoviesVideos
 import com.example.mypetproject.data.actors.MoviesActors
+import com.example.mypetproject.data.actors.details.ActorsDetails
 import com.example.mypetproject.data.review.review
 import retrofit2.Call
 
@@ -22,6 +23,10 @@ class MoviesDBRepositoryImpl : MoviesDBRepository {
 
     override fun getActors(id: Int): Call<MoviesActors> {
         return apiInterface.getActors(id, Constants.API_KEY)
+    }
+
+    override fun getActorsDetails(id: Int): Call<ActorsDetails> {
+        return apiInterface.getActorsDetails(id, Constants.API_KEY)
     }
 
     override fun getReview(id: Int): Call<review> {

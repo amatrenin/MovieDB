@@ -4,6 +4,7 @@ import com.example.mypetproject.data.Details.MoviesDetails
 import com.example.mypetproject.data.Movies.Movies
 import com.example.mypetproject.data.MoviesVideos.MoviesVideos
 import com.example.mypetproject.data.actors.MoviesActors
+import com.example.mypetproject.data.actors.details.ActorsDetails
 import com.example.mypetproject.data.review.review
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -31,12 +32,11 @@ interface ApiInterface {
         @Query("api_key") apiKey: String,
     ): Call<MoviesActors>
 
-    // here is a new request
-//    @GET("3/movie/{movie_id}/credits")
-//    fun getActors(
-//        @Path("movie_id") movieId: Int,
-//        @Query("api_key") apiKey: String,
-//    ): Call<MoviesActors>
+    @GET("3/person/{person_id}")
+    fun getActorsDetails(
+        @Path("person_id") person_Id: Int,
+        @Query("api_key") apiKey: String,
+    ): Call<ActorsDetails>
 
     @GET("3/movie/{movie_id}/reviews")
     fun getReviews(

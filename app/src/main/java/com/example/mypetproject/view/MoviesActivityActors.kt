@@ -5,19 +5,19 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
+import com.example.mypetproject.data.actors.details.ActorsDetails
 import com.example.mypetproject.view.adapters.CustomAdapterActors
-import com.example.mypetproject.view.adapters.CustomAdapterActorsActivity
 import com.example.mypetproject.viewmodel.MoviesViewModel
+import com.squareup.picasso.Picasso
 
 class MoviesActivityActors : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors {
 
     private val mViewModel: MoviesViewModel = MoviesViewModel()
 
     private lateinit var mMoviesActorsRecycler: RecyclerView
-    private lateinit var mMoviesActorsAdapter: CustomAdapterActorsActivity
+ //   private lateinit var mMoviesActorsAdapter: CustomAdapterActorsActivity
 
     private lateinit var mTitleActors: TextView
     private lateinit var mBiography: TextView
@@ -25,20 +25,19 @@ class MoviesActivityActors : AppCompatActivity(), CustomAdapterActors.ItemClickL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movies_actors)
+        setContentView(R.layout.card_view_design_actors_activity)
         val id = intent.getIntExtra("id", 0)
         initObservers()
         initViews()
-        mViewModel.getMovieActors(id)
+        mViewModel.getMovieActorsDetails(id)
         Log.d("testLogs", "get actorsACtivity $id")
     }
 
     private fun initObservers() {
         mViewModel.apply {
-            movieDetailsActors.observe(this@MoviesActivityActors) {
-                mMoviesActorsAdapter = CustomAdapterActorsActivity(it, this@MoviesActivityActors)
-                mMoviesActorsRecycler.adapter = mMoviesActorsAdapter
-
+            movieDetailsActorsActivity.observe(this@MoviesActivityActors) {
+            setMovieInformationActors(it)
+                Log.d("testLogs", "get actorsACtivity it $it")
 
 
 //                it.forEach { Cast ->
@@ -52,19 +51,23 @@ class MoviesActivityActors : AppCompatActivity(), CustomAdapterActors.ItemClickL
 
 
 
-//    private fun setMovieInformationActors(movieDetails: Cast?) {
-//        mTitleActors.text = movieDetails?.name
-//        mBiography.text = movieDetails?.character
-//
-//
-//        Picasso.get()
-//            .load("https://image.tmdb.org/t/p/w500" + movieDetails?.profile_path)
-//            .into(mBannerActors)
-//    }
+    private fun setMovieInformationActors(movieDetails: ActorsDetails?) {
+        mTitleActors.text = movieDetails?.name
+        mBiography.text = movieDetails?.biography
+
+
+        Picasso.get()
+            .load("https://image.tmdb.org/t/p/w500" + movieDetails?.profile_path)
+            .into(mBannerActors)
+    }
 
     private fun initViews() {
-        mMoviesActorsRecycler = findViewById(R.id.rcActorsActivity)
-        mMoviesActorsRecycler.layoutManager = LinearLayoutManager(this)
+//        mMoviesActorsRecycler = findViewById(R.id.rcActorsActivity)
+//        mMoviesActorsRecycler.layoutManager = LinearLayoutManager(this)
+
+        mTitleActors = findViewById(R.id.actors_details_title)
+        mBannerActors = findViewById(R.id.actors_details_image_banner)
+        mBiography = findViewById(R.id.actors_details_dody_biography)
     }
 
     override fun onItemClickActors(position: Int) {
