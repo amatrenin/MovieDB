@@ -132,7 +132,5 @@ class MoviesViewModel : ViewModel() {
             }
         })
     }
-
-
 }
 
