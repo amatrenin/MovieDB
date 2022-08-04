@@ -3,11 +3,13 @@ package com.example.mypetproject.view.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
 import com.example.mypetproject.data.review.ResultReview
 import com.example.mypetproject.view.MoviesDetailsActivity
+import com.squareup.picasso.Picasso
 
 class CustomAdapterReview(
     private val mListReview: List<ResultReview?>,
@@ -38,6 +40,9 @@ class CustomAdapterReview(
         // sets the text to the textview from our itemHolder class
         holder.textView2.text = ItemsViewModel?.author
         holder.textView1.text = ItemsViewModel?.content
+
+        Picasso.get().load("https://image.tmdb.org/t/p/w500" + mListReview[position]?.url)
+            .into(holder.imageView)
     }
 
     // return the number of the items in the list
@@ -50,5 +55,6 @@ class CustomAdapterReview(
         //   val imageView: ImageView = itemView.findViewById(R.id.imAvatarReview)
         val textView1: TextView = itemView.findViewById(R.id.tvTextReview)
         val textView2: TextView = itemView.findViewById(R.id.tvTitleReview)
+        val imageView: ImageView = itemView.findViewById(R.id.imReview)
     }
 }
