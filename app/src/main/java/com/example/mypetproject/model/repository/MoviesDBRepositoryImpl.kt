@@ -13,8 +13,8 @@ import retrofit2.Call
 class MoviesDBRepositoryImpl : MoviesDBRepository {
     private val apiInterface = ApiInterface.create()
 
-    override fun getMovies(): Call<Movies> {
-        return apiInterface.getMovies(Constants.API_KEY, "eu-US", 1)
+     override fun getMovies(): Call<Movies> {
+       return apiInterface.getMovies(Constants.API_KEY, "eu-US", 1)
     }
 
     override fun getMoviesDetails(id: Int): Call<MoviesDetails> {

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
 import com.example.mypetproject.data.actors.Cast
@@ -31,7 +32,9 @@ class CustomAdapterActors(
 
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val ItemsViewModel = mListActors[position]
 
+        holder.textView.text = ItemsViewModel?.name
 
 
         Picasso.get().load("https://image.tmdb.org/t/p/w500" + mListActors[position]?.profile_path)
@@ -48,6 +51,7 @@ class CustomAdapterActors(
     // Holds the views for adding it to image and text
     inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageViewActors)
+        val textView: TextView = itemView.findViewById(R.id.tvTitleActorName)
 
         init {
             ItemView.setOnClickListener {
