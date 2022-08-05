@@ -20,13 +20,12 @@
             android:layout_height="50dp"
             android:layout_marginStart="3dp"
             android:layout_marginTop="3dp"
-            android:text="@{review.author}"
+            android:text="@string/Review_Details_title"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="title" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvTextReview"
@@ -38,14 +37,14 @@
             android:background="?android:attr/selectableItemBackground"
             android:fontFamily="sans-serif-light"
             android:lineSpacingMultiplier="1.2"
+            android:text="@string/Review_Details_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvTitleReview"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="content" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imReview"

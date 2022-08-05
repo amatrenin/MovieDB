@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">mypetproject</string>
-    <string name="main_activity_button_registration">Registration</string>
-    <string name="main_activity_email">Email</string>
-    <string name="main_activity_password">Password</string>
-    <string name="main_activity_button_login">login</string>
+    <string name="Movies_Details_Name_of_the_movie">Name of the movie</string>
+    <string name="Movies_Details_Realise_Date">Realise Date:</string>
+    <string name="Movies_Details_Realise_Date_date">21 april 2005</string>
+    <string name="Movies_Details_Overview">Overview</string>
+    <string name="Movies_Details_Score">Score :</string>
+    <string name="Movies_Details_Score_number">7.9</string>
+    <string name="Movies_Details_description">description of movie details</string>
+    <string name="Actors_Details_title">Name of the actors</string>
+    <string name="Actors_Details_biography">Biography</string>
+    <string name="Actors_Details_Name">Actors name</string>
+    <string name="Review_Details_title">Title</string>
+    <string name="Review_Details_content">Content</string>
 </resources>
