@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,12 +17,13 @@ import com.example.mypetproject.view.adapters.TrailerAdapter
 import com.example.mypetproject.viewmodel.MoviesViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors,
     CustomAdapterReview.ItemClickListenerReview {
 
-    private val mViewModel: MoviesViewModel = MoviesViewModel()
+    private val mViewModel: MoviesViewModel by viewModels()
 
 
     private lateinit var mMoviesActorsRecycler: RecyclerView

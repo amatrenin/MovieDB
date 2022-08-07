@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
@@ -11,10 +12,12 @@ import com.example.mypetproject.data.actors.details.ActorsDetails
 import com.example.mypetproject.view.adapters.CustomAdapterActors
 import com.example.mypetproject.viewmodel.MoviesViewModel
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MoviesActivityActors : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors {
 
-    private val mViewModel: MoviesViewModel = MoviesViewModel()
+    private val mViewModel: MoviesViewModel by viewModels()
 
     private lateinit var mMoviesActorsRecycler: RecyclerView
  //   private lateinit var mMoviesActorsAdapter: CustomAdapterActorsActivity

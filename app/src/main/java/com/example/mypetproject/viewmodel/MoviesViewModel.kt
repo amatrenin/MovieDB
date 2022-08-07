@@ -15,12 +15,14 @@ import com.example.mypetproject.data.actors.details.ActorsDetails
 import com.example.mypetproject.data.review.ResultReview
 import com.example.mypetproject.data.review.review
 import com.example.mypetproject.model.repository.MoviesDBRepository
-import com.example.mypetproject.model.repository.MoviesDBRepositoryImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class MoviesViewModel : ViewModel() {
+@HiltViewModel
+class MoviesViewModel @Inject constructor(private val mMoviesDBRepository: MoviesDBRepository) : ViewModel() {
 
     private val _movies = MutableLiveData<List<Result?>>()
     val movies: LiveData<List<Result?>> = _movies
@@ -40,10 +42,9 @@ class MoviesViewModel : ViewModel() {
     private val _movieVideoYoutubeID = MutableLiveData<List<ResultX>>()
     val movieVideoYoutubeID: LiveData<List<ResultX>> = _movieVideoYoutubeID
 
-    val mMoviesRepository: MoviesDBRepository = MoviesDBRepositoryImpl()
 
     fun getMovies() {
-        val response = mMoviesRepository.getMovies()
+        val response = mMoviesDBRepository.getMovies()
         response.enqueue(object : Callback<Movies> {
             override fun onResponse(call: Call<Movies>?, response: Response<Movies>?) {
                 Log.d("testLogs", "On response Success Movies : ${call.toString()}")
@@ -59,7 +60,7 @@ class MoviesViewModel : ViewModel() {
     }
 
     fun getMovieDetails(id: Int) {
-        val response = mMoviesRepository.getMoviesDetails(id)
+        val response = mMoviesDBRepository.getMoviesDetails(id)
         response.enqueue(object : Callback<MoviesDetails> {
             override fun onResponse(call: Call<MoviesDetails>, response: Response<MoviesDetails>) {
 
@@ -74,7 +75,7 @@ class MoviesViewModel : ViewModel() {
     }
 
     fun getMovieActors(id: Int) {
-        val response = mMoviesRepository.getActors(id)
+        val response = mMoviesDBRepository.getActors(id)
         response.enqueue(object : Callback<MoviesActors> {
             override fun onResponse(call: Call<MoviesActors>, response: Response<MoviesActors>) {
 
@@ -89,7 +90,7 @@ class MoviesViewModel : ViewModel() {
     }
 
     fun getMovieActorsDetails(id: Int) {
-        val response = mMoviesRepository.getActorsDetails(id)
+        val response = mMoviesDBRepository.getActorsDetails(id)
         response.enqueue(object : Callback<ActorsDetails> {
             override fun onResponse(call: Call<ActorsDetails>, response: Response<ActorsDetails>) {
 
@@ -104,7 +105,7 @@ class MoviesViewModel : ViewModel() {
     }
 
     fun getReview(id: Int) {
-        val response = mMoviesRepository.getReview(id)
+        val response = mMoviesDBRepository.getReview(id)
         response.enqueue(object : Callback<review> {
             override fun onResponse(call: Call<review>, response: Response<review>) {
 
@@ -119,7 +120,7 @@ class MoviesViewModel : ViewModel() {
     }
 
     fun getMoviesVideos(id: Int) {
-        val response = mMoviesRepository.getMoviesVideos(id)
+        val response = mMoviesDBRepository.getMoviesVideos(id)
         response.enqueue(object : Callback<MoviesVideos> {
             override fun onResponse(call: Call<MoviesVideos>, response: Response<MoviesVideos>) {
 

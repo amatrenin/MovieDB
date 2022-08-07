@@ -3,16 +3,19 @@ package com.example.mypetproject.view
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
 import com.example.mypetproject.view.adapters.CustomAdapter
 import com.example.mypetproject.viewmodel.MoviesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
 
-    private val mViewModel: MoviesViewModel = MoviesViewModel()
+    private val mViewModel: MoviesViewModel by viewModels()
 
     private lateinit var mMoviesRecycler: RecyclerView
     private lateinit var mMoviesAdapter: CustomAdapter

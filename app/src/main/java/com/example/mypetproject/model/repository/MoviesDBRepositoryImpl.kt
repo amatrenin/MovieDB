@@ -10,8 +10,7 @@ import com.example.mypetproject.data.actors.details.ActorsDetails
 import com.example.mypetproject.data.review.review
 import retrofit2.Call
 
-class MoviesDBRepositoryImpl : MoviesDBRepository {
-    private val apiInterface = ApiInterface.create()
+class MoviesDBRepositoryImpl(private val apiInterface: ApiInterface) : MoviesDBRepository {
 
      override fun getMovies(): Call<Movies> {
        return apiInterface.getMovies(Constants.API_KEY, "eu-US", 1)
