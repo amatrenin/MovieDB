@@ -44,12 +44,10 @@ interface ApiInterface {
         @Query("api_key") apiKey: String,
     ): Call<review>
 
-
     @GET("3/movie/{movie_id}/videos")
     fun getVideos(@Path("movie_id") movieId: Int,
                   @Query("api_key") apiKey: String
     ): Call<MoviesVideos>
-
 
 
     companion object {

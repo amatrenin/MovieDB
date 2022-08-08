@@ -8,31 +8,34 @@ import com.example.mypetproject.data.MoviesVideos.MoviesVideos
 import com.example.mypetproject.data.actors.MoviesActors
 import com.example.mypetproject.data.actors.details.ActorsDetails
 import com.example.mypetproject.data.review.review
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import retrofit2.Call
 
+@ExperimentalCoroutinesApi
 class MoviesDBRepositoryImpl(private val apiInterface: ApiInterface) : MoviesDBRepository {
 
-     override fun getMovies(): Call<Movies> {
-       return apiInterface.getMovies(Constants.API_KEY, "eu-US", 1)
+
+    override suspend fun getMovies(): Call<Movies> {
+        return apiInterface.getMovies(Constants.API_KEY, "eu-US", 1)
     }
 
-    override fun getMoviesDetails(id: Int): Call<MoviesDetails> {
+    override suspend fun getMoviesDetails(id: Int): Call<MoviesDetails> {
         return apiInterface.getMoviesDetails(id, Constants.API_KEY)
     }
 
-    override fun getActors(id: Int): Call<MoviesActors> {
+    override suspend fun getActors(id: Int): Call<MoviesActors> {
         return apiInterface.getActors(id, Constants.API_KEY)
     }
 
-    override fun getActorsDetails(id: Int): Call<ActorsDetails> {
+    override suspend fun getActorsDetails(id: Int): Call<ActorsDetails> {
         return apiInterface.getActorsDetails(id, Constants.API_KEY)
     }
 
-    override fun getReview(id: Int): Call<review> {
+    override suspend fun getReview(id: Int): Call<review> {
         return apiInterface.getReviews(id, Constants.API_KEY)
     }
 
-    override fun getMoviesVideos(id: Int): Call<MoviesVideos> {
+    override suspend fun getMoviesVideos(id: Int): Call<MoviesVideos> {
         return apiInterface.getVideos(id, Constants.API_KEY)
     }
 }

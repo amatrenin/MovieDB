@@ -18,8 +18,10 @@ import com.example.mypetproject.viewmodel.MoviesViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
+@ExperimentalCoroutinesApi
 class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors,
     CustomAdapterReview.ItemClickListenerReview {
 
@@ -130,7 +132,7 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         mMoviesActorsRecycler = findViewById(R.id.rcViewActors)
         mMoviesActorsRecycler.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.HORIZONTAL, false)
-//
+
         mReviewRecycler = findViewById(R.id.rcReview)
         mReviewRecycler.layoutManager = LinearLayoutManager(this)
 

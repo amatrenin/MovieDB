@@ -6,29 +6,31 @@ import com.example.mypetproject.data.MoviesVideos.MoviesVideos
 import com.example.mypetproject.data.actors.MoviesActors
 import com.example.mypetproject.data.actors.details.ActorsDetails
 import com.example.mypetproject.data.review.review
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import retrofit2.Call
 
 /**
  * Repository provaides information taken from MovieDB API
  */
+@ExperimentalCoroutinesApi
 interface MoviesDBRepository {
 
     /**
      * Returns list of popular [Movies]
      */
-    fun getMovies() : Call<Movies>
+     suspend fun getMovies(): Call<Movies>
 
     /**
      * Returns information for a single movie by returning [MoviesDetails]
      * @param id - indification number of the needed movie
      */
-    fun getMoviesDetails(id : Int) : Call<MoviesDetails>
+    suspend fun getMoviesDetails(id: Int): Call<MoviesDetails>
 
-    fun getActors(id : Int) : Call<MoviesActors>
+    suspend fun getActors(id: Int): Call<MoviesActors>
 
-    fun getActorsDetails(id : Int) : Call<ActorsDetails>
+    suspend fun getActorsDetails(id: Int): Call<ActorsDetails>
 
-    fun getReview(id : Int) : Call<review>
+    suspend fun getReview(id: Int): Call<review>
 
-    fun getMoviesVideos(id: Int) : Call<MoviesVideos>
+    suspend fun getMoviesVideos(id: Int): Call<MoviesVideos>
 }
