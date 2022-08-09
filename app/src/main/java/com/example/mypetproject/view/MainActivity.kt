@@ -3,6 +3,7 @@ package com.example.mypetproject.view
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mypetproject.R
 import com.example.mypetproject.data.User
@@ -11,11 +12,15 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
+@AndroidEntryPoint
+@ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
-    private val mMainActivityViewModel: MainActivityViewModel = MainActivityViewModel()
+    private val mMainActivityViewModel: MainActivityViewModel by viewModels()
+
 
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()

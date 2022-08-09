@@ -13,14 +13,16 @@ import com.example.mypetproject.view.adapters.CustomAdapterActors
 import com.example.mypetproject.viewmodel.MoviesViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
+@ExperimentalCoroutinesApi
 class MoviesActivityActors : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors {
+
 
     private val mViewModel: MoviesViewModel by viewModels()
 
     private lateinit var mMoviesActorsRecycler: RecyclerView
- //   private lateinit var mMoviesActorsAdapter: CustomAdapterActorsActivity
 
     private lateinit var mTitleActors: TextView
     private lateinit var mBiography: TextView

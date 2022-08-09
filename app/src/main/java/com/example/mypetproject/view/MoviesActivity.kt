@@ -11,8 +11,10 @@ import com.example.mypetproject.R
 import com.example.mypetproject.view.adapters.CustomAdapter
 import com.example.mypetproject.viewmodel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
+@ExperimentalCoroutinesApi
 class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
 
     private val mViewModel: MoviesViewModel by viewModels()

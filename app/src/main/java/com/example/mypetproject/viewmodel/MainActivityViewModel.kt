@@ -1,14 +1,15 @@
 package com.example.mypetproject.viewmodel
 
 
+import androidx.lifecycle.ViewModel
 import com.example.mypetproject.data.User
 import com.example.mypetproject.model.repository.FirebaseRepository
-import com.example.mypetproject.model.repository.FirebaseRepositoryImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
+@HiltViewModel
+class MainActivityViewModel @Inject constructor(private val mFirebaseRepository: FirebaseRepository) : ViewModel() {
 
-class MainActivityViewModel {
-
-    private val mFirebaseRepository: FirebaseRepository = FirebaseRepositoryImpl()
     fun updateUserData(firebaseUser: User, uid: String) {
         mFirebaseRepository.updateUserData(firebaseUser, uid)
     }
