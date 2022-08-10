@@ -27,28 +27,31 @@
 
 
 
-The MovieDB is based on Kotlin, retrifit,pattern MVVM architecture, Dagger-Hilt, coroutines.
-Android Jetpack
+<strong>The MovieDB is based on Kotlin, retrifit,pattern MVVM architecture, Dagger-Hilt, coroutines.</strong>
+<ui>
+<b>Android Jetpack</b>
 
-Lifecycle An interface that automatically responds to lifecycle events.
+<li>Lifecycle An interface that automatically responds to lifecycle events.</li>
 
-LiveData Data objects that notify views of changes to the underlying database.
+<li>LiveData Data objects that notify views of changes to the underlying database.</li>
 
-ViewModel Data related to the user interface that is not destroyed when the application is rotated. Easily schedule asynchronous tasks for optimal execution.
+<li>ViewModel Data related to the user interface that is not destroyed when the application is rotated. Easily schedule asynchronous tasks for optimal execution.</li>
 
-DI
-Hilt Hilt is a dependency injection library for Android that reduces the execution time of manual dependency injection into your project. Performing manual dependency injection requires that you create each class and its dependencies manually, and use containers to reuse and manage dependencies.
-Image
-Glide Image loading and caching library for Android, focused on smooth scrolling.
+<br><b>DI Hilt</b>
+<li> Hilt is a dependency injection library for Android that reduces the execution time of manual dependency injection into your project. Performing manual dependency injection requires that you create each class and its dependencies manually, and use containers to reuse and manage dependencies.</li>
+<br><b>Image</b>
+<li>Glide Image loading and caching library for Android, focused on smooth scrolling.</li>
 
-Picasso Picasso allows you to easily upload images to your app - often in a single line of code.
+<li>Picasso Picasso allows you to easily upload images to your app - often in a single line of code.</li>
 
-HTTP
-Retrofit2 Type-safe HTTP client for Android and Java.
+<br><b>HTTP</b><br>
+<li>Retrofit2 Type-safe HTTP client for Android and Java.</li>
 
-OkHttp HTTP + HTTP/2 client for Android and Java applications.
+<li>OkHttp HTTP + HTTP/2 client for Android and Java applications.</li>
 
-Coroutines
-Kotlin Coroutines Coroutines is a rich library for coroutines developed by JetBrains. It contains a number of high-level primitives with support for coroutines, which are discussed in this guide, including startup, asynchrony, and others.
-Video Player
-Youtube Player Android-Youtube-Player is a stable and customizable open source YouTube player for Android. It provides a simple view that can be easily integrated into each Activity/Fragment.
+<br><b>Coroutines</b>
+<li>Kotlin Coroutines Coroutines is a rich library for coroutines developed by JetBrains. It contains a number of high-level primitives with support for coroutines, which are discussed in this guide, including startup, asynchrony, and others.</li>
+
+<br><b>Video Player</b>
+<li>Youtube Player Android-Youtube-Player is a stable and customizable open source YouTube player for Android. It provides a simple view that can be easily integrated into each Activity/Fragment.</li>
+</ui>
