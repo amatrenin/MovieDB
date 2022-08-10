@@ -29,7 +29,8 @@
 
 <strong>The MovieDB is based on Kotlin, retrifit,pattern MVVM architecture, Dagger-Hilt, coroutines.</strong>
 <ui>
-<b>Android Jetpack</b>
+<br>
+<br><b>Android Jetpack</b>
 
 <li>Lifecycle An interface that automatically responds to lifecycle events.</li>
 
