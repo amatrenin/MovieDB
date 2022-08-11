@@ -41,6 +41,7 @@
 <br><b>DI Hilt</b>
 <li> Hilt is a dependency injection library for Android that reduces the execution time of manual dependency injection into your project. Performing manual dependency injection requires that you create each class and its dependencies manually, and use containers to reuse and manage dependencies.</li>
 <br><b>Image</b>
+<br><br>
 <li>Glide Image loading and caching library for Android, focused on smooth scrolling.</li>
 
 <li>Picasso Picasso allows you to easily upload images to your app - often in a single line of code.</li>
