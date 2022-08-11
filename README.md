@@ -56,4 +56,7 @@
 
 <br><b>Video Player</b>
 <li>Youtube Player Android-Youtube-Player is a stable and customizable open source YouTube player for Android. It provides a simple view that can be easily integrated into each Activity/Fragment.</li>
+
+<br><b>Firebase<b>
+<li>Authentication lets you add an end-to-end identity solution to your app for easy user authentication, sign-in, and onboarding in just a few lines.</li>
 </ui>
