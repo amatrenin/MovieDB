@@ -18,7 +18,7 @@ interface MoviesDBRepository {
     /**
      * Returns list of popular [Movies]
      */
-     suspend fun getMovies(): Call<Movies>
+    suspend fun getMovies(): Call<Movies>
 
     /**
      * Returns information for a single movie by returning [MoviesDetails]

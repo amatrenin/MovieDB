@@ -27,7 +27,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 @ExperimentalCoroutinesApi
-class MoviesViewModel @Inject constructor(private val mMoviesDBRepository: MoviesDBRepository) : ViewModel() {
+class MoviesViewModel @Inject constructor(
+    private val mMoviesDBRepository: MoviesDBRepository,
+) :
+    ViewModel() {
+
 
     private val _movies = MutableLiveData<List<Result?>>()
     val movies: LiveData<List<Result?>> = _movies
@@ -72,7 +76,7 @@ class MoviesViewModel @Inject constructor(private val mMoviesDBRepository: Movie
             response.enqueue(object : Callback<MoviesDetails> {
                 override fun onResponse(
                     call: Call<MoviesDetails>,
-                    response: Response<MoviesDetails>
+                    response: Response<MoviesDetails>,
                 ) {
 
                     Log.d("testLogs", "Onresponse Success getMovieDetails${call.toString()}")
@@ -92,7 +96,7 @@ class MoviesViewModel @Inject constructor(private val mMoviesDBRepository: Movie
             response.enqueue(object : Callback<MoviesActors> {
                 override fun onResponse(
                     call: Call<MoviesActors>,
-                    response: Response<MoviesActors>
+                    response: Response<MoviesActors>,
                 ) {
 
                     Log.d("testLogs", "Onresponse Success getActors${call.toString()}")
@@ -112,7 +116,7 @@ class MoviesViewModel @Inject constructor(private val mMoviesDBRepository: Movie
             response.enqueue(object : Callback<ActorsDetails> {
                 override fun onResponse(
                     call: Call<ActorsDetails>,
-                    response: Response<ActorsDetails>
+                    response: Response<ActorsDetails>,
                 ) {
 
                     Log.d("testLogs", "Onresponse Success getActors${call.toString()}")
@@ -149,7 +153,7 @@ class MoviesViewModel @Inject constructor(private val mMoviesDBRepository: Movie
             response.enqueue(object : Callback<MoviesVideos> {
                 override fun onResponse(
                     call: Call<MoviesVideos>,
-                    response: Response<MoviesVideos>
+                    response: Response<MoviesVideos>,
                 ) {
 
                     Log.d("testLogs", "Onresponse Success getVideo : ${call.toString()}")

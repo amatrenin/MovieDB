@@ -10,7 +10,9 @@ import com.example.mypetproject.R
 import com.example.mypetproject.data.actors.Cast
 import com.example.mypetproject.view.MoviesDetailsActivity
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class CustomAdapterActors(
     private val mListActors: List<Cast?>,
     val mItemClickListenerActors: MoviesDetailsActivity,

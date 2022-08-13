@@ -11,7 +11,9 @@ import com.example.mypetproject.view.MoviesDetailsActivity
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class TrailerAdapter(
     private val trailerList: List<ResultX?>,
     private val mItemClickListenerReview: MoviesDetailsActivity,

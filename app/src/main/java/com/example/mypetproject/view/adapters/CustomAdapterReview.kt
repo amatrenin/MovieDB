@@ -10,7 +10,9 @@ import com.example.mypetproject.R
 import com.example.mypetproject.data.review.ResultReview
 import com.example.mypetproject.view.MoviesDetailsActivity
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class CustomAdapterReview(
     private val mListReview: List<ResultReview?>,
     private val mItemClickListenerReview: MoviesDetailsActivity,
