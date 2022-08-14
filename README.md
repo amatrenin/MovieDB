@@ -46,7 +46,7 @@
 
 <li>Picasso Picasso allows you to easily upload images to your app - often in a single line of code.</li>
 
-<br><b>HTTP</b><br>
+<br><b>HTTP</b><br> 
 <li>Retrofit2 Type-safe HTTP client for Android and Java.</li>
 
 <li>OkHttp HTTP + HTTP/2 client for Android and Java applications.</li>
