@@ -14,7 +14,6 @@ import retrofit2.Call
 @ExperimentalCoroutinesApi
 class MoviesDBRepositoryImpl(private val apiInterface: ApiInterface) : MoviesDBRepository {
 
-
     override suspend fun getMovies(): Call<Movies> {
         return apiInterface.getMovies(Constants.API_KEY, "eu-US", 1)
     }

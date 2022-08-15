@@ -32,7 +32,6 @@ class MoviesViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-
     private val _movies = MutableLiveData<List<Result?>>()
     val movies: LiveData<List<Result?>> = _movies
 

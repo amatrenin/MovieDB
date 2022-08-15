@@ -13,12 +13,15 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+
 interface ApiInterface {
 
     @GET("3/movie/popular")
-    fun getMovies(@Query("api_key") sort: String,
-                  @Query("language") language: String,
-                  @Query("page") page: Int): Call<Movies>
+    fun getMovies(
+        @Query("api_key") sort: String,
+        @Query("language") language: String,
+        @Query("page") page: Int,
+    ): Call<Movies>
 
     @GET("3/movie/{movie_id}")
     fun getMoviesDetails(
@@ -45,8 +48,9 @@ interface ApiInterface {
     ): Call<review>
 
     @GET("3/movie/{movie_id}/videos")
-    fun getVideos(@Path("movie_id") movieId: Int,
-                  @Query("api_key") apiKey: String
+    fun getVideos(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String,
     ): Call<MoviesVideos>
 
 
