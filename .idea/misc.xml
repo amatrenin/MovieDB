@@ -5,12 +5,14 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.2056159420289855" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1645" />
+        <entry key="app/src/main/res/drawable/ic_add.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1645" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/activity_movies.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_movies_actors.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_movies_details.xml" value="0.3294876098632813" />
         <entry key="app/src/main/res/layout/activity_movies_videos.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_new_word.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_trailer_single_item.xml" value="0.1648148148148148" />
         <entry key="app/src/main/res/layout/card_view_actors.xml" value="0.30885416666666665" />
@@ -21,7 +23,9 @@
         <entry key="app/src/main/res/layout/item_movie.xml" value="0.29375" />
         <entry key="app/src/main/res/layout/item_trailer.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/new_app_widget.xml" value="0.2947916666666667" />
+        <entry key="app/src/main/res/layout/recyclerview_item_room.xml" value="0.29375" />
         <entry key="app/src/main/res/layout/test.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/test_room.xml" value="0.29375" />
         <entry key="app/src/main/res/layout/youtube_player_view.xml" value="0.29375" />
       </map>
     </option>
