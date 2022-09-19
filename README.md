@@ -54,6 +54,10 @@
 <br><b>Coroutines</b>
 <li>Kotlin Coroutines Coroutines is a rich library for coroutines developed by JetBrains. It contains a number of high-level primitives with support for coroutines, which are discussed in this guide, including startup, asynchrony, and others.</li>
 
+<br><b>Fragment</b>
+
+<li>A Fragment represents a reusable portion of your app's UI. A fragment defines and manages its own layout, has its own lifecycle, and can handle its own input events. Fragments cannot live on their own--they must be hosted by an activity or another fragment.</li>
+
 <br><b>Video Player</b>
 <li>Youtube Player Android-Youtube-Player is a stable and customizable open source YouTube player for Android. It provides a simple view that can be easily integrated into each Activity/Fragment.</li>
 
