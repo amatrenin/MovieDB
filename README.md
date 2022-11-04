@@ -32,7 +32,7 @@
 <br>
 <br><b>Android Jetpack</b>
 
-<li>Lifecycle An interface that automatically responds to lifecycle events.</li>
+<li>Lifecycle An interface that automatically responds to lifecycle events. </li>
 
 <li>LiveData Data objects that notify views of changes to the underlying database.</li>
 
