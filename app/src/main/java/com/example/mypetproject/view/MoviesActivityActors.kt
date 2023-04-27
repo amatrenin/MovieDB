@@ -19,11 +19,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 class MoviesActivityActors : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors {
 
-
     private val mViewModel: MoviesViewModel by viewModels()
 
     private lateinit var mMoviesActorsRecycler: RecyclerView
-
     private lateinit var mTitleActors: TextView
     private lateinit var mBiography: TextView
     private lateinit var mBannerActors: ImageView
@@ -41,7 +39,7 @@ class MoviesActivityActors : AppCompatActivity(), CustomAdapterActors.ItemClickL
     private fun initObservers() {
         mViewModel.apply {
             movieDetailsActorsActivity.observe(this@MoviesActivityActors) {
-            setMovieInformationActors(it)
+                setMovieInformationActors(it)
                 Log.d("testLogs", "get actorsACtivity it $it")
 
 
@@ -50,10 +48,9 @@ class MoviesActivityActors : AppCompatActivity(), CustomAdapterActors.ItemClickL
 //                    Log.d("testLogs", "test getActorsActivity $Cast")
 //                }
 
-                }
             }
         }
-
+    }
 
 
     private fun setMovieInformationActors(movieDetails: ActorsDetails?) {
