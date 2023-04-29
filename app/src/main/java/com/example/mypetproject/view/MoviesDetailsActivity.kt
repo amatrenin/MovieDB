@@ -1,7 +1,9 @@
 package com.example.mypetproject.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
@@ -22,11 +24,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
 @ExperimentalCoroutinesApi
-class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors,
+class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors,
     CustomAdapterReview.ItemClickListenerReview {
 
     private val mViewModel: MoviesViewModel by viewModels()
-
 
     private lateinit var mMoviesActorsRecycler: RecyclerView
     private lateinit var mMoviesActorsAdapter: CustomAdapterActors
@@ -43,6 +44,8 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
     private lateinit var mOverview: TextView
     private lateinit var mBanner: ImageView
     private lateinit var mYouTubePlayer: YouTubePlayer
+    private var isFavorite = false
+    private lateinit var favoriteClick: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,10 +64,11 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         mViewModel.getReview(id)
     }
 
+
     private fun initObservers() {
         mViewModel.apply {
             movieDetails.observe(this@MoviesDetailsActivity) {
-                setMovieInformation(it)
+                setMovieInformation(it, context = baseContext)
             }
         }
     }
@@ -109,7 +113,8 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         }
     }
 
-    private fun setMovieInformation(movieDetails: MoviesDetails?) {
+    private fun setMovieInformation(movieDetails: MoviesDetails?, context: Context) {
+        val valueBoolean = updateFavoriteButtonImage(movieDetails, context)
         mTitle.text = movieDetails?.title
         mReliaseDate.text = movieDetails?.release_date.toString()
         mScore.text = movieDetails?.vote_average.toString()
@@ -119,10 +124,60 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         Picasso.get()
             .load("https://image.tmdb.org/t/p/w500" + movieDetails?.backdrop_path)
             .into(mBanner)
+        if (movieDetails != null) {
+            updateFavoriteStatus(
+                movieDetails = movieDetails,
+                valueBoolean = valueBoolean,
+                context = context
+            )
+        }
+
+    }
+
+    private fun updateFavoriteStatus(
+        valueBoolean: Boolean,
+        movieDetails: MoviesDetails,
+        context: Context
+    ) {
+        favoriteClick.setOnClickListener {
+            isFavorite = if (isFavorite == valueBoolean) {
+                favoriteClick.setImageResource(R.drawable.ic_baseline_favorite_24)
+                SaveShared.setFavorite(context, movieDetails.id.toString(), true)
+                mViewModel.insertItem(moviesData = movieDetails)
+                Log.d(
+                    "favorite",
+                    "click favBtn -> insert ${mViewModel.insertItem(moviesData = movieDetails)}"
+                )
+                true
+            } else {
+                favoriteClick.setImageResource(R.drawable.ic_baseline_favorite_cansel)
+                SaveShared.setFavorite(context, movieDetails.id.toString(), false)
+                mViewModel.deleteItem(moviesData = movieDetails)
+                Log.d(
+                    "favorite",
+                    "click favBtn -> delete ${mViewModel.deleteItem(moviesData = movieDetails)}"
+                )
+                false
+            }
+        }
+    }
+
+    private fun updateFavoriteButtonImage(movieDetails: MoviesDetails?, context: Context): Boolean {
+        // ПРОБЛЕМА СНИЗУ
+        val valueBoolean =
+            SaveShared.getFavorite(context, movieDetails?.id.toString()) // здесь могут бть проблемы
+        if (isFavorite != valueBoolean) {
+            favoriteClick.setImageResource(R.drawable.ic_baseline_favorite_24)
+
+        } else {
+            favoriteClick.setImageResource(R.drawable.ic_baseline_favorite_cansel)
+        }
+        return valueBoolean
     }
 
 
     private fun initViews() {
+        favoriteClick = findViewById(R.id.favoriteBtnAdd)
         mTitle = findViewById(R.id.movies_details_title)
         mReliaseDate = findViewById(R.id.movies_details_date)
         mScore = findViewById(R.id.movies_details_score)
@@ -130,26 +185,46 @@ class MoviesDetailsActivity : AppCompatActivity(), CustomAdapterActors.ItemClick
         mBanner = findViewById(R.id.movies_details_image_banner)
 
         mMoviesActorsRecycler = findViewById(R.id.rcViewActors)
-        mMoviesActorsRecycler.layoutManager = LinearLayoutManager(this,
-            LinearLayoutManager.HORIZONTAL, false)
+        mMoviesActorsRecycler.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.HORIZONTAL, false
+        )
 
         mReviewRecycler = findViewById(R.id.rcReview)
         mReviewRecycler.layoutManager = LinearLayoutManager(this)
 
         mVideosRecycler = findViewById(R.id.rcVideosRecycler)
-        mVideosRecycler.layoutManager = LinearLayoutManager(this,
-            LinearLayoutManager.HORIZONTAL, false)
+        mVideosRecycler.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.HORIZONTAL, false
+        )
     }
 
-    override fun onItemClickActors(id: Int) {
+    override fun onItemClickActors(position: Int) {
         val intent = Intent(this, MoviesActivityActors::class.java)
-        intent.putExtra("id", id)
+        intent.putExtra("id", position)
         startActivity(intent)
     }
 
-    override fun onItemClickReview(id: Int) {
+    override fun onItemClickReview(position: Int) {
         val intent = Intent(this, MoviesActivityActors::class.java)
-        intent.putExtra("id", id)
+        intent.putExtra("id", position)
         startActivity(intent)
     }
+}
+
+@Suppress("DEPRECATION")
+class SaveShared {
+    companion object {
+        fun setFavorite(context: Context?, key: String, value: Boolean) {
+            val setFavoriteShared = PreferenceManager.getDefaultSharedPreferences(context)
+            setFavoriteShared.edit().putBoolean(key, value).apply()
+        }
+
+        fun getFavorite(context: Context, key: String): Boolean {
+            val getFavoriteShared = PreferenceManager.getDefaultSharedPreferences(context)
+            return getFavoriteShared.getBoolean(key, false)
+        }
+    }
+
 }

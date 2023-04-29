@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.mypetproject.data.Details.MoviesDetails
 import com.example.mypetproject.data.Movies.Movies
 import com.example.mypetproject.data.Movies.Result
@@ -16,6 +18,7 @@ import com.example.mypetproject.data.actors.details.ActorsDetails
 import com.example.mypetproject.data.review.ResultReview
 import com.example.mypetproject.data.review.review
 import com.example.mypetproject.model.repository.MoviesDBRepository
+import com.example.mypetproject.room.RoomRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,11 +32,12 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 class MoviesViewModel @Inject constructor(
     private val mMoviesDBRepository: MoviesDBRepository,
+    private val roomRepository: RoomRepository
 ) :
     ViewModel() {
 
-    private val _movies = MutableLiveData<List<Result?>>()
-    val movies: LiveData<List<Result?>> = _movies
+    private val _movies = MutableLiveData<PagingData<MoviesDetails>>()
+    val movies: MutableLiveData<PagingData<MoviesDetails>> = _movies
 
     private val _movieDetails = MutableLiveData<MoviesDetails>()
     val movieDetails: LiveData<MoviesDetails> = _movieDetails
@@ -50,22 +54,48 @@ class MoviesViewModel @Inject constructor(
     private val _movieVideoYoutubeID = MutableLiveData<List<ResultX>>()
     val movieVideoYoutubeID: LiveData<List<ResultX>> = _movieVideoYoutubeID
 
+    private val favoriteItemList: MutableLiveData<List<MoviesDetails>> = MutableLiveData()
+    val favoriteItemResult: MutableLiveData<List<MoviesDetails>> = favoriteItemList
+
+    /**
+     * Provides all data from room
+     */
+    fun getAllItem() {
+        val result = roomRepository.getAllItem()
+        result.observeForever { response ->
+            Log.d("APIResponse", response.toString())
+            favoriteItemList.postValue(response.asReversed())
+        }
+    }
+
+    /**
+     * Insert Item in room data base
+     * @param item - provides item that need to be insert in room data base
+     */
+    fun insertItem(moviesData: MoviesDetails) {
+        favoriteItemList.value.let {
+            favoriteItemList.postValue(it?.plus(moviesData))
+            roomRepository.insertItem(moviesData)
+        }
+    }
+
+    /**
+     * Delete existing item from room database
+     * @param item - provides item that need to be deleted from room data base
+     */
+    fun deleteItem(moviesData: MoviesDetails) {
+        favoriteItemList.value.let {
+            favoriteItemList.postValue(it?.minus(moviesData))
+            roomRepository.deleteItem(moviesData)
+        }
+    }
 
     fun getMovies() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = mMoviesDBRepository.getMovies()
-            response.enqueue(object : Callback<Movies> {
-                override fun onResponse(call: Call<Movies>?, response: Response<Movies>?) {
-                    Log.d("testLogs", "On response Success Movies : ${call.toString()}")
-                    _movies.postValue(response?.body()?.results)
+        viewModelScope.launch(Dispatchers.Main) {
+            val response = mMoviesDBRepository.getMovies().cachedIn(viewModelScope)
+            response.observeForever  { response ->
+                    _movies.postValue(response)
                 }
-
-
-                override fun onFailure(call: Call<Movies>, t: Throwable) {
-                    Log.d("testLogs", "onFailure Movies : ${t.message}")
-
-                }
-            })
         }
     }
 
@@ -77,13 +107,10 @@ class MoviesViewModel @Inject constructor(
                     call: Call<MoviesDetails>,
                     response: Response<MoviesDetails>,
                 ) {
-
-                    Log.d("testLogs", "Onresponse Success getMovieDetails${call.toString()}")
                     _movieDetails.postValue(response.body())
                 }
 
                 override fun onFailure(call: Call<MoviesDetails>, t: Throwable) {
-                    Log.d("testLogs", "onFailure getMovieDetails : ${t.message}")
                 }
             })
         }
@@ -97,13 +124,9 @@ class MoviesViewModel @Inject constructor(
                     call: Call<MoviesActors>,
                     response: Response<MoviesActors>,
                 ) {
-
-                    Log.d("testLogs", "Onresponse Success getActors${call.toString()}")
                     _movieDetailsActors.postValue(response?.body()?.cast)
                 }
-
                 override fun onFailure(call: Call<MoviesActors>, t: Throwable) {
-                    Log.d("testLogs", "onFailure getActors : ${t.message}")
                 }
             })
         }
@@ -117,13 +140,9 @@ class MoviesViewModel @Inject constructor(
                     call: Call<ActorsDetails>,
                     response: Response<ActorsDetails>,
                 ) {
-
-                    Log.d("testLogs", "Onresponse Success getActors${call.toString()}")
                     _movieDetailsActorsActivity.postValue(response?.body())
                 }
-
                 override fun onFailure(call: Call<ActorsDetails>, t: Throwable) {
-                    Log.d("testLogs", "onFailure getActors : ${t.message}")
                 }
             })
         }
@@ -134,13 +153,9 @@ class MoviesViewModel @Inject constructor(
             val response = mMoviesDBRepository.getReview(id)
             response.enqueue(object : Callback<review> {
                 override fun onResponse(call: Call<review>, response: Response<review>) {
-
-                    Log.d("testLogs", "Onresponse Success getReview${call.toString()}")
                     _movieReview.postValue(response.body()?.results)
                 }
-
                 override fun onFailure(call: Call<review>, t: Throwable) {
-                    Log.d("testLogs", "onFailure getActors : ${t.message}")
                 }
             })
         }
@@ -154,11 +169,8 @@ class MoviesViewModel @Inject constructor(
                     call: Call<MoviesVideos>,
                     response: Response<MoviesVideos>,
                 ) {
-
-                    Log.d("testLogs", "Onresponse Success getVideo : ${call.toString()}")
                     _movieVideoYoutubeID.postValue(response.body()?.results)
                 }
-
                 override fun onFailure(call: Call<MoviesVideos>, t: Throwable) {
                     Log.d("testLogs", "onFailure getVideo : ${t.message}")
                 }

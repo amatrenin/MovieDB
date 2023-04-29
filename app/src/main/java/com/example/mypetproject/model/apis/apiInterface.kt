@@ -1,4 +1,4 @@
-package com.example.mypetproject
+package com.example.mypetproject.model.apis
 
 import com.example.mypetproject.data.Details.MoviesDetails
 import com.example.mypetproject.data.Movies.Movies
@@ -7,6 +7,7 @@ import com.example.mypetproject.data.actors.MoviesActors
 import com.example.mypetproject.data.actors.details.ActorsDetails
 import com.example.mypetproject.data.review.review
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -17,11 +18,11 @@ import retrofit2.http.Query
 interface ApiInterface {
 
     @GET("3/movie/popular")
-    fun getMovies(
+   suspend fun getMovies(
         @Query("api_key") sort: String,
         @Query("language") language: String,
         @Query("page") page: Int,
-    ): Call<Movies>
+    ): Response<Movies>
 
     @GET("3/movie/{movie_id}")
     fun getMoviesDetails(

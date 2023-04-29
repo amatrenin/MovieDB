@@ -65,6 +65,14 @@
                 android:background="@color/background2"
                 android:padding="4dp">
 
+                <ImageView
+                    android:id="@+id/favoriteBtnAdd"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_favorite_cansel" />
+
                 <TextView
                     android:id="@+id/movies_details_body_overview_label"
                     android:layout_width="wrap_content"

@@ -35,14 +35,10 @@ class CustomAdapterActors(
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ItemsViewModel = mListActors[position]
-
         holder.textView.text = ItemsViewModel?.name
-
 
         Picasso.get().load("https://image.tmdb.org/t/p/w500" + mListActors[position]?.profile_path)
             .into(holder.imageView)
-
-
     }
 
     // return the number of the items in the list

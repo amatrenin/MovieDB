@@ -1,5 +1,7 @@
 package com.example.mypetproject.model.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.PagingData
 import com.example.mypetproject.data.Details.MoviesDetails
 import com.example.mypetproject.data.Movies.Movies
 import com.example.mypetproject.data.MoviesVideos.MoviesVideos
@@ -18,7 +20,7 @@ interface MoviesDBRepository {
     /**
      * Returns list of popular [Movies]
      */
-    suspend fun getMovies(): Call<Movies>
+    suspend fun getMovies(): LiveData<PagingData<MoviesDetails>>
 
     /**
      * Returns information for a single movie by returning [MoviesDetails]

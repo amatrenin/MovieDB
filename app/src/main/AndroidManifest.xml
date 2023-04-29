@@ -14,7 +14,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/movies"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Mypetproject">
+        android:usesCleartextTraffic="true"
+    android:theme="@style/Theme.Mypetproject">
         <receiver
             android:name=".view.widgets.NewAppWidget"
             android:exported="false">
@@ -36,11 +37,15 @@
             android:exported="false" />
         <activity
             android:name=".view.MoviesDetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".view.MoviesActivity"
             android:exported="false"
             tools:node="merge" />
+        <activity
+            android:name=".view.MoviesFavorite"
+            android:exported="false" />
         <activity
             android:name=".view.MainActivity"
             android:exported="true"

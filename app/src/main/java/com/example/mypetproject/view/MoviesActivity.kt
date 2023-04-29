@@ -3,8 +3,12 @@ package com.example.mypetproject.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
@@ -20,28 +24,67 @@ class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
     private val mViewModel: MoviesViewModel by viewModels()
 
     private lateinit var mMoviesRecycler: RecyclerView
-    private lateinit var mMoviesAdapter: CustomAdapter
+    private val mMoviesAdapter = CustomAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
         initViews()
         initObservers()
+        initAdapterClickListener()
         mViewModel.getMovies()
+
+        val toolbar1 = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar1).apply {
+            title = "Toolbar Menu"
+
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.nav_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.favorites -> {
+                val intent = Intent(this, MoviesFavorite::class.java)
+                startActivity(intent)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initObservers() {
         mViewModel.apply {
             movies.observe(this@MoviesActivity) {
-                mMoviesAdapter = CustomAdapter(it, this@MoviesActivity)
-                mMoviesRecycler.adapter = mMoviesAdapter
+                it?.let {
+                    mMoviesAdapter.submitData(lifecycle, it)
+                }
             }
         }
     }
 
+    private fun initAdapterClickListener() {
+        mMoviesAdapter.setOnMovieClickListener(
+            object : CustomAdapter.ItemClickListener {
+                override fun onItemClick(id: Int) {
+                    val intent = Intent(baseContext, MoviesDetailsActivity::class.java)
+                    intent.putExtra("id", id)
+                    startActivity(intent)
+                    Log.d("favorite", "intent -> $intent")
+                }
+            })
+    }
+
     private fun initViews() {
         mMoviesRecycler = findViewById(R.id.recyclerview)
-        mMoviesRecycler.layoutManager = GridLayoutManager(this, 2)
+        mMoviesRecycler.layoutManager = GridLayoutManager(this, 3)
+        mMoviesRecycler.adapter = mMoviesAdapter
     }
 
     override fun onBackPressed() {
@@ -50,7 +93,7 @@ class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
     }
 
     override fun onItemClick(id: Int) {
-        val intent = Intent(this, MoviesDetailsActivity::class.java)
+        val intent = Intent(baseContext, MoviesDetailsActivity::class.java)
         intent.putExtra("id", id)
         startActivity(intent)
     }
