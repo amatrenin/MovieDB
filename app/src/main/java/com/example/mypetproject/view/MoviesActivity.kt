@@ -1,14 +1,16 @@
 package com.example.mypetproject.view
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
@@ -25,6 +27,7 @@ class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
 
     private lateinit var mMoviesRecycler: RecyclerView
     private val mMoviesAdapter = CustomAdapter()
+    private lateinit var progressDialog: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +35,12 @@ class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
         initViews()
         initObservers()
         initAdapterClickListener()
+        observeLoadingAndErrors()
         mViewModel.getMovies()
 
         val toolbar1 = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar1).apply {
-            title = "Toolbar Menu"
+            title = getString(R.string.toolbar_menu)
 
         }
     }
@@ -81,10 +85,25 @@ class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
             })
     }
 
+    private fun observeLoadingAndErrors() {
+        mViewModel.initLoadState(mMoviesAdapter)
+        mViewModel.loading.observe(this) { isLoading ->
+            progressDialog.isVisible = isLoading
+            Log.d("favorite", "progressBar MoviesActivity isLoading $isLoading")
+        }
+
+            mViewModel.errorMessage.observe(this) { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(this, "Error progressBar", Toast.LENGTH_SHORT).show()            }
+        }
+    }
+
     private fun initViews() {
         mMoviesRecycler = findViewById(R.id.recyclerview)
+        progressDialog = findViewById(R.id.progressDialog)
         mMoviesRecycler.layoutManager = GridLayoutManager(this, 3)
         mMoviesRecycler.adapter = mMoviesAdapter
+
     }
 
     override fun onBackPressed() {

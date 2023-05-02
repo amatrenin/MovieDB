@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
@@ -17,7 +20,6 @@ import com.example.mypetproject.view.adapters.CustomAdapterActors
 import com.example.mypetproject.view.adapters.CustomAdapterReview
 import com.example.mypetproject.view.adapters.TrailerAdapter
 import com.example.mypetproject.viewmodel.MoviesViewModel
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -43,9 +45,9 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
     private lateinit var mScore: TextView
     private lateinit var mOverview: TextView
     private lateinit var mBanner: ImageView
-    private lateinit var mYouTubePlayer: YouTubePlayer
     private var isFavorite = false
     private lateinit var favoriteClick: ImageView
+    private lateinit var progressDialog: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,10 +60,23 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
         initObserversActors()
         initObserversReview()
         initObserversVideos()
+        observeLoadingAndErrors()
         mViewModel.getMovieDetails(id)
         mViewModel.getMoviesVideos(id)
         mViewModel.getMovieActors(id)
         mViewModel.getReview(id)
+    }
+
+    private fun observeLoadingAndErrors() {
+        mViewModel.loadingDetails.observe(this) { isLoading ->
+            progressDialog.isVisible = isLoading
+            Log.d("favorite", "progressBar DeatailsActivity isLoading $isLoading")
+            mViewModel.errorMessage.observe(this) { errorMessage ->
+                errorMessage?.let {
+                    Toast.makeText(this, "Error progressBar", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
 
@@ -78,11 +93,9 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
             movieDetailsActors.observe(this@MoviesDetailsActivity) {
                 mMoviesActorsAdapter = CustomAdapterActors(it, this@MoviesDetailsActivity)
                 mMoviesActorsRecycler.adapter = mMoviesActorsAdapter
-
 //                it.cast.forEach { cast ->
 //                    (cast)
 //                }
-                Log.d("testLogs", "observe ${it}")
             }
         }
     }
@@ -92,11 +105,6 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
             movieReview.observe(this@MoviesDetailsActivity) {
                 mReviewAdapter = CustomAdapterReview(it, this@MoviesDetailsActivity)
                 mReviewRecycler.adapter = mReviewAdapter
-
-//                it.cast.forEach { cast ->
-//                    (cast)
-//                }
-                Log.d("testLogs", "observe ${it}")
             }
         }
     }
@@ -106,9 +114,6 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
             movieVideoYoutubeID.observe(this@MoviesDetailsActivity) {
                 mTrailerAdapter = TrailerAdapter(it, this@MoviesDetailsActivity)
                 mVideosRecycler.adapter = mTrailerAdapter
-
-
-                Log.d("testLogs", "videos observe ${it}")
             }
         }
     }
@@ -122,7 +127,7 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
 
 
         Picasso.get()
-            .load("https://image.tmdb.org/t/p/w500" + movieDetails?.backdrop_path)
+            .load(getString(R.string.https_image_tmdb) + movieDetails?.backdrop_path)
             .into(mBanner)
         if (movieDetails != null) {
             updateFavoriteStatus(
@@ -131,7 +136,6 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
                 context = context
             )
         }
-
     }
 
     private fun updateFavoriteStatus(
@@ -163,9 +167,8 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
     }
 
     private fun updateFavoriteButtonImage(movieDetails: MoviesDetails?, context: Context): Boolean {
-        // ПРОБЛЕМА СНИЗУ
         val valueBoolean =
-            SaveShared.getFavorite(context, movieDetails?.id.toString()) // здесь могут бть проблемы
+            SaveShared.getFavorite(context, movieDetails?.id.toString())
         if (isFavorite != valueBoolean) {
             favoriteClick.setImageResource(R.drawable.ic_baseline_favorite_24)
 
@@ -183,13 +186,12 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
         mScore = findViewById(R.id.movies_details_score)
         mOverview = findViewById(R.id.movies_details_body_overview)
         mBanner = findViewById(R.id.movies_details_image_banner)
-
+        progressDialog = findViewById<ProgressBar>(R.id.progressBarDetails) as ProgressBar
         mMoviesActorsRecycler = findViewById(R.id.rcViewActors)
         mMoviesActorsRecycler.layoutManager = LinearLayoutManager(
             this,
             LinearLayoutManager.HORIZONTAL, false
         )
-
         mReviewRecycler = findViewById(R.id.rcReview)
         mReviewRecycler.layoutManager = LinearLayoutManager(this)
 

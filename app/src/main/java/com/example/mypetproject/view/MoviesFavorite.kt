@@ -3,8 +3,11 @@ package com.example.mypetproject.view
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,11 +24,8 @@ class MoviesFavorite() : AppCompatActivity(), CustomAdapter.ItemClickListener {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private val mViewModel: MoviesViewModel by viewModels()
-
     private lateinit var mMoviesRecycler: RecyclerView
     private val adapter by lazy { CustomAdapterFavorites() }
-
-    private lateinit var data: List<Result>
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +37,7 @@ class MoviesFavorite() : AppCompatActivity(), CustomAdapter.ItemClickListener {
         initAdapterClickListener()
         mViewModel.getAllItem()
     }
+
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun initObservers() {

@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             RESULT_CANCELED -> {
-                Toast.makeText(this@MainActivity, "Something wrong with registration",
+                Toast.makeText(this@MainActivity, R.string.introduce_local_variable,
                     Toast.LENGTH_SHORT).show()
             }
             else -> {
