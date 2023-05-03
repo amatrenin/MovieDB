@@ -51,8 +51,8 @@ class DataModule {
     fun provideApiInterfaceMovie() : ApiInterface = ApiInterface.create()
 
     @Provides
-    fun provideMovieRepository(apiInterface: ApiInterface) : MoviesDBRepository {
-       return MoviesDBRepositoryImpl(apiInterface = apiInterface)
+    fun provideMovieRepository(mApiInterface: ApiInterface) : MoviesDBRepository {
+       return MoviesDBRepositoryImpl(mApiInterface = mApiInterface)
     }
 
     @Provides

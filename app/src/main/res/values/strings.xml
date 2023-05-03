@@ -16,7 +16,7 @@
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
     <string name="introduce_local_variable">Introduce local variable</string>
-    <string name="toolbar_menu">Toolbar Menu</string>
+    <string name="toolbar_menu">TheMovieDB</string>
     <string name="https_image_tmdb">https://image.tmdb.org/t/p/w500</string>
     <string name="favorites">Favorites</string>
 </resources>

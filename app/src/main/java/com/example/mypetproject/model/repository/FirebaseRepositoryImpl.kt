@@ -7,6 +7,8 @@ import com.google.firebase.database.DatabaseReference
 class FirebaseRepositoryImpl(private val mDatabase: DatabaseReference) : FirebaseRepository {
 
     override fun updateUserData(firebaseUser: User, uid: String) {
-        mDatabase.child("users").child(uid).setValue(firebaseUser)
+        mDatabase.child("users")
+            .child(uid)
+            .setValue(firebaseUser)
     }
 }

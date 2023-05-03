@@ -1,37 +1,32 @@
 package com.example.mypetproject.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypetproject.R
 import com.example.mypetproject.viewmodel.MoviesViewModel
-import com.example.mypetproject.data.Movies.Result
 import com.example.mypetproject.view.adapters.CustomAdapter
 import com.example.mypetproject.view.adapters.CustomAdapterFavorites
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
+@OptIn(ExperimentalCoroutinesApi::class)
 class MoviesFavorite() : AppCompatActivity(), CustomAdapter.ItemClickListener {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private val mViewModel: MoviesViewModel by viewModels()
     private lateinit var mMoviesRecycler: RecyclerView
-    private val adapter by lazy { CustomAdapterFavorites() }
+    private val mAdapterFavorite by lazy { CustomAdapterFavorites() }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.favorite_movies_screen)
-
         initViews()
         initObservers()
         initAdapterClickListener()
@@ -39,15 +34,13 @@ class MoviesFavorite() : AppCompatActivity(), CustomAdapter.ItemClickListener {
     }
 
 
-    @OptIn(ExperimentalCoroutinesApi::class)
+    @SuppressLint("NotifyDataSetChanged")
     private fun initObservers() {
         mViewModel.apply {
             favoriteItemResult.observe(this@MoviesFavorite, Observer { list ->
                 if (list != null) {
-                    adapter.mList = list
-                    adapter.notifyDataSetChanged()
-                } else {
-                    Log.d("favorite", "list is empty $list")
+                    mAdapterFavorite.mList = list
+                    mAdapterFavorite.notifyDataSetChanged()
                 }
             })
             mViewModel.getAllItem()
@@ -57,17 +50,16 @@ class MoviesFavorite() : AppCompatActivity(), CustomAdapter.ItemClickListener {
     private fun initViews() {
         mMoviesRecycler = findViewById<RecyclerView>(R.id.rcView_favorites)
         mMoviesRecycler.layoutManager = GridLayoutManager(this, 3)
-        mMoviesRecycler.adapter = adapter
+        mMoviesRecycler.adapter = mAdapterFavorite
     }
 
     private fun initAdapterClickListener() {
-        adapter.setOnMovieClickListener(
+        mAdapterFavorite.setOnMovieClickListener(
             object : CustomAdapterFavorites.onClickItemFav {
                 override fun onClikedItemFavorite(id: Int) {
                     val intent = Intent(baseContext, MoviesDetailsActivity::class.java)
                     intent.putExtra("id", id)
                     startActivity(intent)
-                    Log.d("favorite", "intent -> $intent")
                 }
             })
     }
@@ -76,6 +68,5 @@ class MoviesFavorite() : AppCompatActivity(), CustomAdapter.ItemClickListener {
         val intent = Intent(this, MoviesDetailsActivity::class.java)
         intent.putExtra("id", id)
         startActivity(intent)
-        Log.d("favorite", "intent -> $intent")
     }
 }

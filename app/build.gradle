@@ -91,6 +91,8 @@ dependencies {
     //Paging
     def paging_version = "3.1.1" //current version at the time
     implementation "androidx.paging:paging-runtime:$paging_version"
+    testImplementation("androidx.paging:paging-common:$paging_version")
+
 
     //test
     testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"

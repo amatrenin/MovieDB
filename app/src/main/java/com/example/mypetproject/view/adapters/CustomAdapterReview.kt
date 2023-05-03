@@ -15,7 +15,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 class CustomAdapterReview(
     private val mListReview: List<ResultReview?>,
-    private val mItemClickListenerReview: MoviesDetailsActivity,
+    private val mItemClickListenerReview: MoviesDetailsActivity
 ) : RecyclerView.Adapter<CustomAdapterReview.ViewHolder>() {
 
     interface ItemClickListenerReview {

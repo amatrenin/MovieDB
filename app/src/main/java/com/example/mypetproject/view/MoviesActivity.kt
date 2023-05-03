@@ -27,7 +27,7 @@ class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
 
     private lateinit var mMoviesRecycler: RecyclerView
     private val mMoviesAdapter = CustomAdapter()
-    private lateinit var progressDialog: ProgressBar
+    private lateinit var mProgressDialog: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +37,6 @@ class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
         initAdapterClickListener()
         observeLoadingAndErrors()
         mViewModel.getMovies()
-
-        val toolbar1 = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar1).apply {
-            title = getString(R.string.toolbar_menu)
-
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -52,7 +46,6 @@ class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             R.id.favorites -> {
                 val intent = Intent(this, MoviesFavorite::class.java)
@@ -80,7 +73,6 @@ class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
                     val intent = Intent(baseContext, MoviesDetailsActivity::class.java)
                     intent.putExtra("id", id)
                     startActivity(intent)
-                    Log.d("favorite", "intent -> $intent")
                 }
             })
     }
@@ -88,22 +80,25 @@ class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
     private fun observeLoadingAndErrors() {
         mViewModel.initLoadState(mMoviesAdapter)
         mViewModel.loading.observe(this) { isLoading ->
-            progressDialog.isVisible = isLoading
-            Log.d("favorite", "progressBar MoviesActivity isLoading $isLoading")
+            mProgressDialog.isVisible = isLoading
         }
 
-            mViewModel.errorMessage.observe(this) { errorMessage ->
+        mViewModel.errorMessage.observe(this) { errorMessage ->
             errorMessage?.let {
-                Toast.makeText(this, "Error progressBar", Toast.LENGTH_SHORT).show()            }
+                Toast.makeText(this, "Error progressBar", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     private fun initViews() {
         mMoviesRecycler = findViewById(R.id.recyclerview)
-        progressDialog = findViewById(R.id.progressDialog)
+        mProgressDialog = findViewById(R.id.progressDialog)
         mMoviesRecycler.layoutManager = GridLayoutManager(this, 3)
         mMoviesRecycler.adapter = mMoviesAdapter
-
+        val toolbar1 = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar1).apply {
+            title = getString(R.string.toolbar_menu)
+        }
     }
 
     override fun onBackPressed() {

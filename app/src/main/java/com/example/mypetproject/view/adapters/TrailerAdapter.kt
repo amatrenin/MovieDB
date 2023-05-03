@@ -15,8 +15,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 class TrailerAdapter(
-    private val trailerList: List<ResultX?>,
-    private val mItemClickListenerReview: MoviesDetailsActivity,
+    private val mTrailerList: List<ResultX?>,
+    private val mItemClickListenerReview: MoviesDetailsActivity
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -29,7 +29,7 @@ class TrailerAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val fruitHolder = holder as FruitViewHolder
-        trailerList[position]?.let { fruitHolder.bind(it) }
+        mTrailerList[position]?.let { fruitHolder.bind(it) }
     }
 
     inner class FruitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -83,5 +83,5 @@ class TrailerAdapter(
         }
     }
 
-    override fun getItemCount(): Int = trailerList.size
+    override fun getItemCount(): Int = mTrailerList.size
 }

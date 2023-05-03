@@ -8,7 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(private val mFirebaseRepository: FirebaseRepository) : ViewModel() {
+class MainActivityViewModel @Inject constructor(private val mFirebaseRepository: FirebaseRepository) :
+    ViewModel() {
 
     fun updateUserData(firebaseUser: User, uid: String) {
         mFirebaseRepository.updateUserData(firebaseUser, uid)

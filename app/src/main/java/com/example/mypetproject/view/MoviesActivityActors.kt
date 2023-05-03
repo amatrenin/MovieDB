@@ -20,7 +20,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class MoviesActivityActors : AppCompatActivity(), CustomAdapterActors.ItemClickListenerActors {
 
     private val mViewModel: MoviesViewModel by viewModels()
-
     private lateinit var mTitleActors: TextView
     private lateinit var mBiography: TextView
     private lateinit var mBannerActors: ImageView
@@ -42,12 +41,9 @@ class MoviesActivityActors : AppCompatActivity(), CustomAdapterActors.ItemClickL
         }
     }
 
-
     private fun setMovieInformationActors(movieDetails: ActorsDetails?) {
         mTitleActors.text = movieDetails?.name
         mBiography.text = movieDetails?.biography
-
-
         Picasso.get()
             .load(getString(R.string.https_image_tmdb) + movieDetails?.profile_path)
             .into(mBannerActors)

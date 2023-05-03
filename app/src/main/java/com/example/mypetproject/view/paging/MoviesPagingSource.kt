@@ -8,14 +8,14 @@ import com.example.mypetproject.data.Details.MoviesDetails
 
 const val NETWORK_PAGE_SIZE = 25
 
-class MoviesPagingSource(private val apiService: ApiInterface) :
+class MoviesPagingSource(private val mApiService: ApiInterface) :
     PagingSource<Int, MoviesDetails>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MoviesDetails> {
 
         return try {
             val position = params.key ?: 1
-            val response = apiService.getMovies(API_KEY, language = "en-US", position)
+            val response = mApiService.getMovies(API_KEY, language = "en-US", position)
             LoadResult.Page(
                 data = response.body()?.results ?: emptyList(),
                 prevKey = if (position == 1) null else position - 1,

@@ -18,7 +18,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import retrofit2.Call
 
 @ExperimentalCoroutinesApi
-class MoviesDBRepositoryImpl(private val apiInterface: ApiInterface) : MoviesDBRepository {
+class MoviesDBRepositoryImpl(private val mApiInterface: ApiInterface) : MoviesDBRepository {
 
     override suspend fun getMovies(): LiveData<PagingData<MoviesDetails>> {
         return Pager(
@@ -28,28 +28,28 @@ class MoviesDBRepositoryImpl(private val apiInterface: ApiInterface) : MoviesDBR
                 initialLoadSize = 2
             ),
             pagingSourceFactory = {
-                MoviesPagingSource(apiInterface)
+                MoviesPagingSource(mApiInterface)
             }, initialKey = 1
         ).liveData
     }
 
     override suspend fun getMoviesDetails(id: Int): Call<MoviesDetails> {
-        return apiInterface.getMoviesDetails(id, Constants.API_KEY)
+        return mApiInterface.getMoviesDetails(id, Constants.API_KEY)
     }
 
     override suspend fun getActors(id: Int): Call<MoviesActors> {
-        return apiInterface.getActors(id, Constants.API_KEY)
+        return mApiInterface.getActors(id, Constants.API_KEY)
     }
 
     override suspend fun getActorsDetails(id: Int): Call<ActorsDetails> {
-        return apiInterface.getActorsDetails(id, Constants.API_KEY)
+        return mApiInterface.getActorsDetails(id, Constants.API_KEY)
     }
 
     override suspend fun getReview(id: Int): Call<review> {
-        return apiInterface.getReviews(id, Constants.API_KEY)
+        return mApiInterface.getReviews(id, Constants.API_KEY)
     }
 
     override suspend fun getMoviesVideos(id: Int): Call<MoviesVideos> {
-        return apiInterface.getVideos(id, Constants.API_KEY)
+        return mApiInterface.getVideos(id, Constants.API_KEY)
     }
 }

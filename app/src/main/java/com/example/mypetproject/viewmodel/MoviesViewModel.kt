@@ -32,7 +32,7 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 class MoviesViewModel @Inject constructor(
     private val mMoviesDBRepository: MoviesDBRepository,
-    private val roomRepository: RoomRepository
+    private val mRoomRepository: RoomRepository
 ) :
     ViewModel() {
 
@@ -70,10 +70,8 @@ class MoviesViewModel @Inject constructor(
      * Provides all data from room
      */
     fun getAllItem() {
-        val result = roomRepository.getAllItem()
-        result.observeForever { response ->
-            favoriteItemList.postValue(response.asReversed())
-        }
+        val result = mRoomRepository.getAllItem()
+        favoriteItemList.postValue(result.asReversed())
     }
 
     /**
@@ -83,7 +81,7 @@ class MoviesViewModel @Inject constructor(
     fun insertItem(moviesData: MoviesDetails) {
         favoriteItemList.value.let {
             favoriteItemList.postValue(it?.plus(moviesData))
-            roomRepository.insertItem(moviesData)
+            mRoomRepository.insertItem(moviesData)
         }
     }
 
@@ -94,7 +92,7 @@ class MoviesViewModel @Inject constructor(
     fun deleteItem(moviesData: MoviesDetails) {
         favoriteItemList.value.let {
             favoriteItemList.postValue(it?.minus(moviesData))
-            roomRepository.deleteItem(moviesData)
+            mRoomRepository.deleteItem(moviesData)
         }
     }
 
@@ -103,8 +101,6 @@ class MoviesViewModel @Inject constructor(
             // update loading state
             _loading.value = loadState.refresh is LoadState.Loading ||
                     loadState.append is LoadState.Loading
-
-            Log.d("favorite", "progressBar viewModel refresh ${_loading.value}")
             // update error message
             val errorState = when {
                 loadState.append is LoadState.Error -> loadState.append as LoadState.Error
@@ -160,7 +156,6 @@ class MoviesViewModel @Inject constructor(
                 ) {
                     _movieDetailsActors.postValue(response.body()?.cast)
                 }
-
                 override fun onFailure(call: Call<MoviesActors>, t: Throwable) {
                 }
             })
@@ -177,7 +172,6 @@ class MoviesViewModel @Inject constructor(
                 ) {
                     _movieDetailsActorsActivity.postValue(response.body())
                 }
-
                 override fun onFailure(call: Call<ActorsDetails>, t: Throwable) {
                 }
             })
@@ -191,7 +185,6 @@ class MoviesViewModel @Inject constructor(
                 override fun onResponse(call: Call<review>, response: Response<review>) {
                     _movieReview.postValue(response.body()?.results)
                 }
-
                 override fun onFailure(call: Call<review>, t: Throwable) {
                 }
             })
@@ -208,7 +201,6 @@ class MoviesViewModel @Inject constructor(
                 ) {
                     _movieVideoYoutubeID.postValue(response.body()?.results)
                 }
-
                 override fun onFailure(call: Call<MoviesVideos>, t: Throwable) {
                 }
             })

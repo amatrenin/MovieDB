@@ -33,27 +33,22 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
 
     private lateinit var mMoviesActorsRecycler: RecyclerView
     private lateinit var mMoviesActorsAdapter: CustomAdapterActors
-
     private lateinit var mReviewRecycler: RecyclerView
     private lateinit var mReviewAdapter: CustomAdapterReview
-
     private lateinit var mVideosRecycler: RecyclerView
     private lateinit var mTrailerAdapter: TrailerAdapter
-
     private lateinit var mTitle: TextView
     private lateinit var mReliaseDate: TextView
     private lateinit var mScore: TextView
     private lateinit var mOverview: TextView
     private lateinit var mBanner: ImageView
-    private var isFavorite = false
-    private lateinit var favoriteClick: ImageView
-    private lateinit var progressDialog: ProgressBar
-
+    private var mIsFavorite = false
+    private lateinit var mFavoriteClick: ImageView
+    private lateinit var mProgressDialog: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies_details)
-
         val id = intent.getIntExtra("id", 0)
         initViews()
         initObservers()
@@ -69,7 +64,7 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
 
     private fun observeLoadingAndErrors() {
         mViewModel.loadingDetails.observe(this) { isLoading ->
-            progressDialog.isVisible = isLoading
+            mProgressDialog.isVisible = isLoading
             Log.d("favorite", "progressBar DeatailsActivity isLoading $isLoading")
             mViewModel.errorMessage.observe(this) { errorMessage ->
                 errorMessage?.let {
@@ -78,7 +73,6 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
             }
         }
     }
-
 
     private fun initObservers() {
         mViewModel.apply {
@@ -93,9 +87,6 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
             movieDetailsActors.observe(this@MoviesDetailsActivity) {
                 mMoviesActorsAdapter = CustomAdapterActors(it, this@MoviesDetailsActivity)
                 mMoviesActorsRecycler.adapter = mMoviesActorsAdapter
-//                it.cast.forEach { cast ->
-//                    (cast)
-//                }
             }
         }
     }
@@ -124,8 +115,6 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
         mReliaseDate.text = movieDetails?.release_date.toString()
         mScore.text = movieDetails?.vote_average.toString()
         mOverview.text = movieDetails?.overview
-
-
         Picasso.get()
             .load(getString(R.string.https_image_tmdb) + movieDetails?.backdrop_path)
             .into(mBanner)
@@ -143,24 +132,16 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
         movieDetails: MoviesDetails,
         context: Context
     ) {
-        favoriteClick.setOnClickListener {
-            isFavorite = if (isFavorite == valueBoolean) {
-                favoriteClick.setImageResource(R.drawable.ic_baseline_favorite_24)
+        mFavoriteClick.setOnClickListener {
+            mIsFavorite = if (mIsFavorite == valueBoolean) {
+                mFavoriteClick.setImageResource(R.drawable.ic_baseline_favorite_24)
                 SaveShared.setFavorite(context, movieDetails.id.toString(), true)
                 mViewModel.insertItem(moviesData = movieDetails)
-                Log.d(
-                    "favorite",
-                    "click favBtn -> insert ${mViewModel.insertItem(moviesData = movieDetails)}"
-                )
                 true
             } else {
-                favoriteClick.setImageResource(R.drawable.ic_baseline_favorite_cansel)
+                mFavoriteClick.setImageResource(R.drawable.ic_baseline_favorite_cansel)
                 SaveShared.setFavorite(context, movieDetails.id.toString(), false)
                 mViewModel.deleteItem(moviesData = movieDetails)
-                Log.d(
-                    "favorite",
-                    "click favBtn -> delete ${mViewModel.deleteItem(moviesData = movieDetails)}"
-                )
                 false
             }
         }
@@ -169,24 +150,24 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
     private fun updateFavoriteButtonImage(movieDetails: MoviesDetails?, context: Context): Boolean {
         val valueBoolean =
             SaveShared.getFavorite(context, movieDetails?.id.toString())
-        if (isFavorite != valueBoolean) {
-            favoriteClick.setImageResource(R.drawable.ic_baseline_favorite_24)
+        if (mIsFavorite != valueBoolean) {
+            mFavoriteClick.setImageResource(R.drawable.ic_baseline_favorite_24)
 
         } else {
-            favoriteClick.setImageResource(R.drawable.ic_baseline_favorite_cansel)
+            mFavoriteClick.setImageResource(R.drawable.ic_baseline_favorite_cansel)
         }
         return valueBoolean
     }
 
 
     private fun initViews() {
-        favoriteClick = findViewById(R.id.favoriteBtnAdd)
+        mFavoriteClick = findViewById(R.id.favoriteBtnAdd)
         mTitle = findViewById(R.id.movies_details_title)
         mReliaseDate = findViewById(R.id.movies_details_date)
         mScore = findViewById(R.id.movies_details_score)
         mOverview = findViewById(R.id.movies_details_body_overview)
         mBanner = findViewById(R.id.movies_details_image_banner)
-        progressDialog = findViewById<ProgressBar>(R.id.progressBarDetails) as ProgressBar
+        mProgressDialog = findViewById<ProgressBar>(R.id.progressBarDetails) as ProgressBar
         mMoviesActorsRecycler = findViewById(R.id.rcViewActors)
         mMoviesActorsRecycler.layoutManager = LinearLayoutManager(
             this,
@@ -228,5 +209,4 @@ class SaveShared {
             return getFavoriteShared.getBoolean(key, false)
         }
     }
-
 }

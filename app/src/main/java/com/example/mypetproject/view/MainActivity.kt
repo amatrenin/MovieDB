@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     private val mMainActivityViewModel: MainActivityViewModel by viewModels()
 
-
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
     ) { res ->
@@ -37,13 +36,13 @@ class MainActivity : AppCompatActivity() {
     /**
      * We make a call to firebase auth api to show dialog for registration
      */
-
     private fun openRegistrationScreen() {
         val intentToAnotherScreen = Intent(this, MoviesActivity::class.java)
         startActivity(intentToAnotherScreen)
 
         val providers = arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build())
+            AuthUI.IdpConfig.EmailBuilder().build()
+        )
 
         val signInIntent = AuthUI.getInstance()
             .createSignInIntentBuilder()
@@ -51,7 +50,6 @@ class MainActivity : AppCompatActivity() {
             .build()
         signInLauncher.launch(signInIntent)
     }
-
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         when (result.resultCode) {
@@ -61,17 +59,16 @@ class MainActivity : AppCompatActivity() {
                     val email = it.email.toString()
                     val uid = it.uid
                     val firebaseUser = User(email, uid)
-
                     mMainActivityViewModel.updateUserData(firebaseUser, uid)
-
                     val intentToAnotherScreen = Intent(this, MoviesActivity::class.java)
                     startActivity(intentToAnotherScreen)
                 }
             }
-
             RESULT_CANCELED -> {
-                Toast.makeText(this@MainActivity, R.string.introduce_local_variable,
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@MainActivity, R.string.introduce_local_variable,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             else -> {
                 //do not to anything

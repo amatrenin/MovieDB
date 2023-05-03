@@ -17,38 +17,38 @@ import retrofit2.http.Query
 
 interface ApiInterface {
 
-    @GET("3/movie/popular")
+    @GET("movie/popular")
    suspend fun getMovies(
         @Query("api_key") sort: String,
         @Query("language") language: String,
         @Query("page") page: Int,
     ): Response<Movies>
 
-    @GET("3/movie/{movie_id}")
+    @GET("movie/{movie_id}")
     fun getMoviesDetails(
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String,
     ): Call<MoviesDetails>
 
-    @GET("3/movie/{movie_id}/credits")
+    @GET("movie/{movie_id}/credits")
     fun getActors(
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String,
     ): Call<MoviesActors>
 
-    @GET("3/person/{person_id}")
+    @GET("person/{person_id}")
     fun getActorsDetails(
         @Path("person_id") person_Id: Int,
         @Query("api_key") apiKey: String,
     ): Call<ActorsDetails>
 
-    @GET("3/movie/{movie_id}/reviews")
+    @GET("movie/{movie_id}/reviews")
     fun getReviews(
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String,
     ): Call<review>
 
-    @GET("3/movie/{movie_id}/videos")
+    @GET("movie/{movie_id}/videos")
     fun getVideos(
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String,
@@ -57,7 +57,7 @@ interface ApiInterface {
 
     companion object {
 
-        var BASE_URL = "https://api.themoviedb.org/"
+        var BASE_URL = "https://api.themoviedb.org/3/"
 
         fun create(): ApiInterface {
 

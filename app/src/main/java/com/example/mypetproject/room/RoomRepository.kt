@@ -7,7 +7,7 @@ interface RoomRepository {
     /**
      * Get todo item from room data base
      */
-    fun getAllItem(): LiveData<List<MoviesDetails>>
+    fun getAllItem(): List<MoviesDetails>
 
     /**
      * add todo item from room data base
