@@ -1,31 +1,3 @@
-<img src="https://user-images.githubusercontent.com/104056823/183885107-d3aed899-0997-48e6-9299-8850872dfdda.gif" 
-     width="200" 
-     height="400" />
-     <img src="https://user-images.githubusercontent.com/104056823/183885509-e00bebb7-0041-4be6-a8aa-c3c83cce2f7d.gif" 
-     width="200" 
-     height="400" />
-     <img src="https://user-images.githubusercontent.com/104056823/183885544-ad233c5a-4741-4c7e-950b-db67579bfaa4.gif" 
-     width="200" 
-     height="400" />
-     <img src="https://user-images.githubusercontent.com/104056823/183885556-034e162a-165b-4157-8550-825a4a6a314b.gif" 
-     width="200" 
-     height="400" />
-      <img src="https://user-images.githubusercontent.com/104056823/183886355-0cfe6742-d7f0-4944-9b4c-3c417771c550.png" 
-     width="200" 
-     height="400" />
-     <img src="https://user-images.githubusercontent.com/104056823/183886405-48905e54-b61c-4d73-9532-aad7fba7db84.png" 
-     width="200" 
-     height="400" />
-     <img src="https://user-images.githubusercontent.com/104056823/183886414-1e8ebdfc-9082-4dd7-b2d4-0c3918d741a7.png" 
-     width="200" 
-     height="400" />
-     <img src="https://user-images.githubusercontent.com/104056823/183886423-f0d91457-53db-4af6-b559-74a007c73407.png" 
-     width="200" 
-     height="400" />
-   
-
-
-
 
 <strong>The MovieDB is based on Kotlin, retrifit,pattern MVVM architecture.</strong>
 <ui>
