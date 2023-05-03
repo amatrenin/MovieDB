@@ -1,4 +1,10 @@
 
+<img width="334" alt="Снимок экрана 2023-05-04 в 02 36 23" src="https://user-images.githubusercontent.com/104056823/236075654-bac48a93-5bdc-45e1-ad0e-1788dc259623.png"> <img width="334" alt="Снимок экрана 2023-05-04 в 02 53 42" src="https://user-images.githubusercontent.com/104056823/236075705-169ce3b2-db89-416a-ac7a-f6bed07a7639.png"><img width="339" alt="Снимок экрана 2023-05-04 в 02 57 32" src="https://user-images.githubusercontent.com/104056823/236075850-2ebe1df0-cb81-424a-91d3-725dad14bfdc.png">
+
+
+
+
+
 <strong>The MovieDB is based on Kotlin, retrifit,pattern MVVM architecture.</strong>
 <ui>
 <br>
@@ -36,3 +42,22 @@
 <br><b>Firebase</b></br>
 <li>Authentication lets you add an end-to-end identity solution to your app for easy user authentication, sign-in, and onboarding in just a few lines.</li>
 </ui>
+
+<br><b>Room</b></br>
+<li>The Room persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite. In particular, Room provides the following benefits:</li>
+
+<li>Compile-time verification of SQL queries.</li>
+<li>Convenience annotations that minimize repetitive and error-prone boilerplate code.</li>
+<li>Streamlined database migration paths.</li>
+
+
+<br><b>Unit test</b></br>
+
+<li>Local tests enable you to evaluate your app's logic more quickly. However, not being able to interact with the Android framework creates a limitation in the types of tests you can run.</li>
+
+<li>A unit test verifies the behavior of a small section of code, the unit under test. It does so by executing that code and checking the result.</li>
+
+<li>Unit tests are usually simple but their setup can be problematic when the unit under test is not designed with testability in mind.</li>
+
+<br><b>Paging</b></br>
+<li>The Paging Library helps you load and display small chunks of data at a time. Loading partial data on demand reduces usage of network bandwidth and system resources.</li>
