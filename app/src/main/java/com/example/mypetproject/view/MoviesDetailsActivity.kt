@@ -65,7 +65,6 @@ class MoviesDetailsActivity() : AppCompatActivity(), CustomAdapterActors.ItemCli
     private fun observeLoadingAndErrors() {
         mViewModel.loadingDetails.observe(this) { isLoading ->
             mProgressDialog.isVisible = isLoading
-            Log.d("favorite", "progressBar DeatailsActivity isLoading $isLoading")
             mViewModel.errorMessage.observe(this) { errorMessage ->
                 errorMessage?.let {
                     Toast.makeText(this, "Error progressBar", Toast.LENGTH_SHORT).show()

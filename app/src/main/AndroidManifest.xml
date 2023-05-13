@@ -25,12 +25,10 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.terry.action.widget.click" />
             </intent-filter>
-
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
-
         <activity
             android:name=".view.MoviesActivityActors"
             android:exported="false" />
@@ -54,5 +52,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

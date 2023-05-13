@@ -1,6 +1,7 @@
 package com.example.mypetproject.viewmodel
 
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.mypetproject.data.User
 import com.example.mypetproject.model.repository.FirebaseRepository
@@ -13,5 +14,6 @@ class MainActivityViewModel @Inject constructor(private val mFirebaseRepository:
 
     fun updateUserData(firebaseUser: User, uid: String) {
         mFirebaseRepository.updateUserData(firebaseUser, uid)
+        Log.d("test", "mFirebaseRepository -> ${mFirebaseRepository.updateUserData(firebaseUser, uid)})")
     }
 }

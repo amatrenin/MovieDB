@@ -24,7 +24,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class MoviesActivity : AppCompatActivity(), CustomAdapter.ItemClickListener {
 
     private val mViewModel: MoviesViewModel by viewModels()
-
     private lateinit var mMoviesRecycler: RecyclerView
     private val mMoviesAdapter = CustomAdapter()
     private lateinit var mProgressDialog: ProgressBar

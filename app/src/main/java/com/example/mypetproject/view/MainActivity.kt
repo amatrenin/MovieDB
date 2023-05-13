@@ -2,6 +2,7 @@ package com.example.mypetproject.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -37,13 +38,14 @@ class MainActivity : AppCompatActivity() {
      * We make a call to firebase auth api to show dialog for registration
      */
     private fun openRegistrationScreen() {
-        val intentToAnotherScreen = Intent(this, MoviesActivity::class.java)
-        startActivity(intentToAnotherScreen)
-
+        /**
+         * in order to make it easier to test new features, remove the comment from the intent below
+         */
+//        val intentToAnotherScreen = Intent(this, MoviesActivity::class.java)
+//        startActivity(intentToAnotherScreen)
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
-
         val signInIntent = AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
