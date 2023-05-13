@@ -14,6 +14,5 @@ class MainActivityViewModel @Inject constructor(private val mFirebaseRepository:
 
     fun updateUserData(firebaseUser: User, uid: String) {
         mFirebaseRepository.updateUserData(firebaseUser, uid)
-        Log.d("test", "mFirebaseRepository -> ${mFirebaseRepository.updateUserData(firebaseUser, uid)})")
     }
 }
